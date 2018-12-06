@@ -1,0 +1,3165 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MbientLab.MetaWear</name>
+    </assembly>
+    <members>
+        <member name="T:MbientLab.MetaWear.Builder.IRouteBranchEnd">
+            <summary>
+            Route element for enforcing that users call <see cref="M:MbientLab.MetaWear.Builder.IRouteBranchEnd.To"/> or <see cref="M:MbientLab.MetaWear.Builder.IRouteBranchEnd.Index(System.Int32)"/> immediately after a terminating branch
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteBranchEnd.To">
+            <summary>
+            Signals the creation of a new multicast branch
+            </summary>
+            <returns>Component representing the most recent multicast branch</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteBranchEnd.Index(System.Int32)">
+            <summary>
+            Gets a specific component value from the split data value
+            </summary>
+            <param name="i">Position in the split values array to return</param>
+            <returns>Object representing the component value</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteBranchEnd.Name(System.String)">
+            <summary>
+            Assigns a user-defined name identifying the processor or producer.  If used with a processor, the processor can be 
+            retrieved by said name with the <see cref="!:IDataProcessor"/> interface.
+            </summary>
+            <param name="name">Assigned unique name to the most recent data producer (sensor or data processor)</param>
+            <returns>Calling object</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.Function1">
+            <summary>
+            1 operand functions that operate on sensor or processor data
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.Function2">
+            <summary>
+            2 operand functions that operate on sensor or processor data
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.Passthrough">
+            <summary>
+            Operation modes for the passthrough limiter
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.ComparisonOutput">
+            <summary>
+            Output modes for the comparison filter, only supported by firmware v1.2.3 or higher
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.ComparisonOutput.Absolute">
+            <summary>
+            Input value is returned when the comparison is satisfied
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.ComparisonOutput.PassFail">
+            <summary>
+            The reference value that satisfies the comparison is returned, no output if none match
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.ComparisonOutput.Reference">
+            <summary>
+            The index (0 based) of the value that satisfies the comparison is returned, n if none match
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.ComparisonOutput.Zone">
+            <summary>
+            0 if comparison failed, 1 if it passed
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.Comparison">
+            <summary>
+            Supported comparison operations
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.Pulse">
+            <summary>
+            Output types of the pulse finder
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.Pulse.Width">
+            <summary>
+            Returns the number of samples in the pulse
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.Pulse.Area">
+            <summary>
+            Returns a running sum of all samples in the pulse
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.Pulse.Peak">
+            <summary>
+            Returns the highest sample value in the pulse
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.Pulse.OnDetect">
+            <summary>
+            Returns 0x1 as soon as a pulse is detected
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.Threshold">
+            <summary>
+            Output modes for the threshold filter
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.Threshold.Absolute">
+            <summary>
+            Return the data as is
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.Threshold.Binary">
+            <summary>
+            1 if the data exceeded the threshold, -1 if below
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.Differential">
+            <summary>
+            Output modes for the differential filter
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.Differential.Absolute">
+            <summary>
+            Return the data as is
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.Differential.Differential">
+            <summary>
+            Return the difference between the value and its reference point
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.Differential.Binary">
+            <summary>
+            1 if the difference is positive, -1 if negative
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.AccountType">
+            <summary>
+            Types of information the accounter processor can append to the data
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.AccountType.Count">
+            <summary>
+            Append a looping counter to all data.  This counter is accessed by calling <see cref="M:MbientLab.MetaWear.IData.Extra``1"/> 
+            with the <code>uint</code> type.
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Builder.AccountType.Time">
+            <summary>
+            Extra information used to calculate actual timestamps for streamed data
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.IRouteComponent">
+            <summary>
+            Component in a route definition
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Multicast">
+            <summary>
+            Creates a branch in the route that direct the input data to different end points
+            </summary>
+            <returns>Component for building a multicast branch</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.To">
+            <summary>
+            Signals the creation of a new multicast branch
+            </summary>
+            <returns>Component from the most recent multicast component</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Split">
+            <summary>
+            Separates multi-component data into its individual values
+            </summary>
+            <returns>Component for building routes for component data values</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Index(System.Int32)">
+            <summary>
+            Gets a specific component value from the split data value
+            </summary>
+            <param name="i">Position in the split values array to return</param>
+            <returns>Object representing the component value</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Stream(System.Action{MbientLab.MetaWear.IData})">
+            <summary>
+            Streams the input data to the local device.  This component is represented by the <see cref="T:MbientLab.MetaWear.ISubscriber"/> interface.
+            </summary>
+            <param name="handler">Handler to process the received data</param>
+            <returns>Calling object</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Stream">
+            <summary>
+            Variant of <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Stream(System.Action{MbientLab.MetaWear.IData})"/> that enables a data stream but does not yet assign a data handler.  
+            The handler can be later attached with <see cref="M:MbientLab.MetaWear.ISubscriber.Attach(System.Action{MbientLab.MetaWear.IData})"/>
+            </summary>
+            <returns>Calling object</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Log(System.Action{MbientLab.MetaWear.IData})">
+            <summary>
+            Records the input data to the on-board logger, retrieved later when a log download is started.  This component is represented 
+            by the <see cref="T:MbientLab.MetaWear.ISubscriber"/> interface.
+            </summary>
+            <param name="handler">Handler to process the received data</param>
+            <returns>Calling object</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Log">
+            <summary>
+            Variant of <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Log(System.Action{MbientLab.MetaWear.IData})"/> that sets up the logger but does not yet assign a data handler.  
+            The handler can be later attached with <see cref="M:MbientLab.MetaWear.ISubscriber.Attach(System.Action{MbientLab.MetaWear.IData})"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.React(System.Action{MbientLab.MetaWear.IDataToken})">
+            <summary>
+            Programs the board to react in response to data being created by the most resent sensor or processor
+            </summary>
+            <param name="action">On-board action to execute</param>
+            <returns>Calling object</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Name(System.String)">
+            <summary>
+            Assigns a user-defined name identifying a processor, producer, or subscriber.  The name can be used to create feedback and feedforward loops, 
+            or refere to subscribers by name rather than index.
+            <para>Processors and subscribers are retrieved by name with the <see cref="!:IDataProcessor"/> interface and <see cref="M:MbientLab.MetaWear.IRoute.LookupSubscriber(System.String)"/> method respectively.</para>
+            </summary>
+            <param name="name">Assigned unique name to the most recent data producer (sensor or data processor)</param>
+            <returns>Calling object</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Accumulate">
+            <summary>
+            Accumulates a running sum of all data samples passing through this component and outputs the current tally
+            </summary>
+            <returns>Component representing the accumulated sum</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Count">
+            <summary>
+            Counts the number of data samples that have passed through this component and outputs the current count
+            </summary>
+            <returns>Component representing the counter output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Buffer">
+            <summary>
+            Stores the input data in memory which can be extracted by reading the buffer state.  As this buffer does not have an output, 
+            the route cannot continue so it must either end or control is passed back to the most recent split or multicast
+            </summary>
+            <returns>Object for continuing the route</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Delay(System.Byte)">
+            <summary>
+            Stops data from passing until at least N samples have been collected.
+            </summary>
+            <param name="samples">Number of samples to collect</param>
+            <returns>Component representing the delayed output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Average(System.Byte)">
+            <summary>
+            Computes a moving average over the previous N samples.  This component will not output data until the first average i.e.
+            until N samples have been received.
+            </summary>
+            <param name="samples">Number of samples to average over</param>
+            <returns>Component representing the running averager</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.HighPass(System.Byte)">
+            <summary>
+            Applies a high pass filter over the input data, available on firmware v1.3.4 and later.
+            </summary>
+            <param name="samples">Number of previous data samples to compare against</param>
+            <returns>Component representing the high pass output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.LowPass(System.Byte)">
+            <summary>
+            Applies a low pass filter over the input data, available on firmware v1.3.4 and later.  
+            <para>This componenet replaces the <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Average(System.Byte)"/> component.</para>
+            </summary>
+            <param name="samples">Number of previous data samples to compare against</param>
+            <returns>Component representing the low pass output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Filter(MbientLab.MetaWear.Builder.Comparison,System.Single[])">
+            <summary>
+            Remove data from the route that does not satisfy the comparison
+            </summary>
+            <param name="op">Comparison operation to perform</param>
+            <param name="references">Reference values to compare against, can be multiple values if the board is on firmware v1.2.3 or later</param>
+            <returns>Component representing the filter output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Filter(MbientLab.MetaWear.Builder.Comparison,MbientLab.MetaWear.Builder.ComparisonOutput,System.Single[])">
+            <summary>
+            Variant of <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Filter(MbientLab.MetaWear.Builder.Comparison,System.Single[])"/> where the filter output provides
+            additional details about the comparison.  This variant component is only supported starting with
+            firmware v1.2.5.  <b>Note that if <see cref="F:MbientLab.MetaWear.Builder.ComparisonOutput.Reference"/>
+            or <see cref="F:MbientLab.MetaWear.Builder.ComparisonOutput.Zone"/> is used, component will instead function as a <code>map</code></b>
+            </summary>
+            <param name="op">Comparison operation to perform</param>
+            <param name="output">Output type the filter should produce</param>
+            <param name="references">Reference values to compare against, can be multiple values if the board is on firmware v1.2.3 or later</param>
+            <returns>Component representing the filter output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Filter(MbientLab.MetaWear.Builder.Comparison,System.String[])">
+            <summary>
+            Variant of the <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Filter(MbientLab.MetaWear.Builder.Comparison,System.Single[])"/> function where the reference values are outputs
+            from other sensors or processors
+            </summary>
+            <param name="op">Comparison operation to perform</param>
+            <param name="names">Names identifying which sensor or processor data to use as the reference value when new values are produced</param>
+            <returns>Component representing the filter output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Filter(MbientLab.MetaWear.Builder.Comparison,MbientLab.MetaWear.Builder.ComparisonOutput,System.String[])">
+            <summary>
+            Variant of <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Filter(MbientLab.MetaWear.Builder.Comparison,MbientLab.MetaWear.Builder.ComparisonOutput,System.Single[])"/> where reference values are outputs
+            from other sensors or processors.
+            </summary>
+            <param name="op">Comparison operation to perform</param>
+            <param name="output">Output type of the filter</param>
+            <param name="names">Names identifying which sensor or processor data to use as the reference value when new values are produced</param>
+            <returns>Component representing the filter output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Find(MbientLab.MetaWear.Builder.Pulse,System.Single,System.UInt16)">
+            <summary>
+            Scans the input data for a pulse.  When one is detected, output a summary of the scanned data
+            </summary>
+            <param name="pulse">Type of summary data to output</param>
+            <param name="threshold">Value the sensor data must exceed for a valid pulse</param>
+            <param name="samples">Minimum number of samples that must be above the threshold for a valid pulse</param>
+            <returns>Component representing the output of the pulse finder</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Find(MbientLab.MetaWear.Builder.Threshold,System.Single)">
+            <summary>
+            Scans the input data for values that cross a boundary, either falling below or rising above
+            </summary>
+            <param name="threshold">Type of summary data to output</param>
+            <param name="boundary">Threshold boundary the data must cross</param>
+            <returns>Component representing the threshold filter output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Find(MbientLab.MetaWear.Builder.Threshold,System.Single,System.Single)">
+            <summary>
+            Variant of <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Find(MbientLab.MetaWear.Builder.Threshold,System.Single)"/> with a configurable hysteresis value for data
+            that frequently oscillates around the threshold boundary
+            </summary>
+            <param name="threshold">Type of summary data to output</param>
+            <param name="boundary">Threshold boundary the data must cross</param>
+            <param name="hysteresis">Minimum distance between the boundary and value that indicates a successful crossing</param>
+            <returns>Component representing the threshold filter output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Find(MbientLab.MetaWear.Builder.Differential,System.Single)">
+            <summary>
+            Scans the input data for sequential data that is a minimum distance away 
+            </summary>
+            <param name="differential"></param>
+            <param name="distance"></param>
+            <returns>Component representing the differential filter output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Limit(MbientLab.MetaWear.Builder.Passthrough,System.UInt16)">
+            <summary>
+            Only allow data through under certain user controlled conditions
+            </summary>
+            <param name="type">Passthrough operation type</param>
+            <param name="value">Initial value to set the passthrough limiter to</param>
+            <returns>Component representing the limiter output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Limit(System.UInt32)">
+            <summary>
+            Reduce the amount of data allowed through such that the output data rate matches the delay
+            </summary>
+            <param name="period">How often to allow data through, in milliseconds (ms)</param>
+            <returns>Component representing the output of the limiter</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Map(MbientLab.MetaWear.Builder.Function1)">
+            <summary>
+            Apply a 1 input function to all of the input data
+            </summary>
+            <param name="fn">Function to use</param>
+            <returns>Component representing the mapper output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Map(MbientLab.MetaWear.Builder.Function2,System.Single)">
+            <summary>
+            Apply a 2 input function to all of the input data
+            </summary>
+            <param name="fn">Function to use</param>
+            <param name="rhs">Second operand for the function</param>
+            <returns>Component representing the mapper output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Map(MbientLab.MetaWear.Builder.Function2,System.String[])">
+            <summary>
+            Variant of <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Map(MbientLab.MetaWear.Builder.Function2,System.Single)"/> where the rhs value is the output of another data producer
+            </summary>
+            <param name="fn">Function to apply to the input data</param>
+            <param name="names">Names identifying which producer to feed into the mapper</param>
+            <returns>Component representing the mapper output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Account">
+            <summary>
+            Variant of <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Account(MbientLab.MetaWear.Builder.AccountType)"/> that defaults to recalculating timestamps
+            </summary>
+            <returns>Component representing the accounter output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Account(MbientLab.MetaWear.Builder.AccountType)">
+            <summary>
+            Add additional information to the payload to assist in checking if streamed data is lost
+            </summary>
+            <param name="type">Type of information to append to the data</param>
+            <returns>Component representing the accounter output</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteComponent.Pack(System.Byte)">
+            <summary>
+            Packs multiple input values into 1 BTLE packet.  Used to reduce the number of packets broadcasted over the link.
+            </summary>
+            <param name="count">Number of input values to pack</param>
+            <returns>Component representing the accounter output</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.IRouteMulticast">
+            <summary>
+            Route element for enforcing that users call <see cref="M:MbientLab.MetaWear.Builder.IRouteMulticast.To"/> immediately after declaring a multicast
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteMulticast.To">
+            <summary>
+            Signals the creation of a new multicast branch
+            </summary>
+            <returns>Component representing the most recent multicast branch</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Builder.IRouteSplit">
+            <summary>
+            RouteComponent for enforcing that users call <see cref="M:MbientLab.MetaWear.Builder.IRouteSplit.Index(System.Int32)"/> immediately after splitting data
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Builder.IRouteSplit.Index(System.Int32)">
+            <summary>
+            Gets a specific component value from the split data value
+            </summary>
+            <param name="i">Position in the split values array to return</param>
+            <returns>Object representing the component value</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Constants">
+            <summary>
+            API related constants
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Constants.METAWEAR_GATT_SERVICE">
+            <summary>
+            UUID identifying the MetaWear GATT service and the advertising UUID
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Constants.METABOOT_SERVICE">
+            <summary>
+            UUID identifying a MetaWear board in MetaBoot mode.  A MetaWear board advertising with this UUID indicates 
+            it is in MetaBoot mode.
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.IEditor">
+            <summary>
+            Common base class for all data processor editors
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.ICounterEditor">
+            <summary>
+            Edits a component
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Count"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.ICounterEditor.Reset">
+            <summary>
+            Reset the internal counter
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.ICounterEditor.Set(System.UInt32)">
+            <summary>
+            Overwrite the internal counter with a new value
+            </summary>
+            <param name="value">New value</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.IAccumulatorEditor">
+            <summary>
+            Edits an accumulate component
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Accumulate"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IAccumulatorEditor.Reset">
+            <summary>
+            Reset the running sum
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IAccumulatorEditor.Set(System.Single)">
+            <summary>
+            Overwrite the accumulated sum with a new value
+            </summary>
+            <param name="value">New value</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.IPassthroughEditor">
+            <summary>
+            Edits a limiter
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Limit(MbientLab.MetaWear.Builder.Passthrough,System.UInt16)"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IPassthroughEditor.Set(System.UInt16)">
+            <summary>
+            Set the internal state
+            </summary>
+            <param name="value">New value</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IPassthroughEditor.Modify(MbientLab.MetaWear.Builder.Passthrough,System.UInt16)">
+            <summary>
+            Changes the passthrough type and initial value
+            </summary>
+            <param name="type">New passthrough type</param>
+            <param name="value">Initial value of the modified limiter</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.IMapEditor">
+            <summary>
+            Edits a 2 op math component 
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Map(MbientLab.MetaWear.Builder.Function2,System.Single)"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IMapEditor.ModifyRhs(System.Single)">
+            <summary>
+            Modifies the right hand value used in the computation
+            </summary>
+            <param name="rhs">New right hand value</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.IComparatorEditor">
+            <summary>
+            Edits a comparison filter
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Filter(MbientLab.MetaWear.Builder.Comparison,System.Single[])"/>
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Filter(MbientLab.MetaWear.Builder.Comparison,MbientLab.MetaWear.Builder.ComparisonOutput,System.Single[])"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IComparatorEditor.Modify(MbientLab.MetaWear.Builder.Comparison,System.Single[])">
+            <summary>
+            Modifies the references values and comparison operation
+            </summary>
+            <param name="op">New comparison operation</param>
+            <param name="references">New reference values, can be multiple values if the board is running firmware v1.2.3 or later</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.IPulseEditor">
+            <summary>
+            Edits a pulse finder
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Find(MbientLab.MetaWear.Builder.Pulse,System.Single,System.UInt16)"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IPulseEditor.Modify(System.Single,System.UInt16)">
+            <summary>
+            Change the criteria that classifies a pulse
+            </summary>
+            <param name="threshold">New boundary the data must exceed</param>
+            <param name="samples">New minimum data sample size</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.IThresholdEditor">
+            <summary>
+            Edits a threshold finder
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Find(MbientLab.MetaWear.Builder.Threshold,System.Single)"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IThresholdEditor.Modify(System.Single,System.Single)">
+            <summary>
+            Modifies the threshold and hysteresis values
+            </summary>
+            <param name="threshold">New threshold value</param>
+            <param name="hysteresis">New hysteresis value</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.IDifferentialEditor">
+            <summary>
+            Edits a differential finder
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Find(MbientLab.MetaWear.Builder.Differential,System.Single)"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IDifferentialEditor.Modify(System.Single)">
+            <summary>
+            Modifies the minimum distance from the reference value
+            </summary>
+            <param name="distance">New minimum distance value</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.ITimeEditor">
+            <summary>
+            Edits a time limiter
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Limit(System.UInt32)"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.ITimeEditor.Modify(System.UInt32)">
+            <summary>
+            Change how often to allow data through
+            </summary>
+            <param name="period"></param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.IHighPassEditor">
+            <summary>
+            Edits a high pass filter
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.HighPass(System.Byte)"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IHighPassEditor.Modify(System.Byte)">
+            <summary>
+            Change how many samples are used to compute the value
+            </summary>
+            <param name="samples">New sample size</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IHighPassEditor.Reset">
+            <summary>
+            Reset the running average
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.ILowPassEditor">
+            <summary>
+            Edits a low pass filter
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.LowPass(System.Byte)"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.ILowPassEditor.Modify(System.Byte)">
+            <summary>
+            Change how many samples are used to compute the value
+            </summary>
+            <param name="samples">New sample size</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.ILowPassEditor.Reset">
+            <summary>
+            Reset the running average
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.DataProcessor.IPackerEditor">
+            <summary>
+            Edits a data packer
+            <seealso cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Pack(System.Byte)"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.DataProcessor.IPackerEditor.Clear">
+            <summary>
+            Clears buffer of accumulated inputs
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.IDataProcessor">
+            <summary>
+            Firmware feature that manipulates data on-board
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IDataProcessor.Edit``1(System.String)">
+            <summary>
+            Edits a data processor
+            </summary>
+            <typeparam name="T">Type to cast the returned object as</typeparam>
+            <param name="name">Processor name to look up, set by <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Name(System.String)"/></param>
+            <returns>Editor object to modify the processor</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IDataProcessor.State(System.String)">
+            <summary>
+            Gets a <see cref="T:MbientLab.MetaWear.IForcedDataProducer"/> representing the processor's internal state
+            </summary>
+            <param name="name">Processor name to look up, set by <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Name(System.String)"/></param>
+            <returns>Data producer object, null if the processor does not have an internal state</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.IDebug">
+            <summary>
+            Auxiliary functions, for advanced use only
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IDebug.ResetAsync">
+            <summary>
+            Issues a firmware reset command to the board.  
+            <para>This task will be immediately cancelled if called within the context of a reaction</para>
+            </summary>
+            <returns>Null when connection is lost</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IDebug.ResetAfterGc">
+            <summary>
+            Commands the board to reset after performing garbage collection.  Use this function in lieu of
+            <see cref="M:MbientLab.MetaWear.Core.IDebug.ResetAsync"/> to reset the board after erasing macros or log data.
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IDebug.DisconnectAsync">
+            <summary>
+            Commands the board to terminate the BLE link.
+            <para>This task will be immediately cancelled if called within the context of a reaction</para>
+            </summary>
+            <returns>Null when the connection is lost</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IDebug.JumpToBootloaderAsync">
+            <summary>
+            Restarts the board in MetaBoot mode which enables firmware updates.
+            <para>This task will be immediately cancelled if called within the context of a reaction</para>
+            </summary>
+            <returns>Null when the connection is lost</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IDebug.EnablePowerSave">
+            <summary>
+            Places the board in a powered down state after the next reset.  
+            <para>When in power save mode, press the switch to wake the board up.</para>
+            </summary>
+            <returns>True if feature is supported, false if powersave cannot be enabled</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IDebug.WriteTmpValue(System.Int32)">
+            <summary>
+            Writes a signed int that persists until a reset, can be later retrieved with <see cref="M:MbientLab.MetaWear.Core.IDebug.ReadTmpValueAsync"/>
+            </summary>
+            <param name="value">Value to write</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IDebug.ReadTmpValueAsync">
+            <summary>
+            Reads the temp value written by <see cref="M:MbientLab.MetaWear.Core.IDebug.WriteTmpValue(System.Int32)"/>
+            </summary>
+            <returns>Temp value read from the device</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.LogDownloadError">
+            <summary>
+            Types of errors encountered during a log download
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.ILogging">
+            <summary>
+            Firmware feature that saves data to the on-board flash memory.
+            <para>This module is used in conjunction with the data route's log component</para>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ILogging.Start(System.Boolean)">
+            <summary>
+            Start logging data
+            </summary>
+            <param name="overwrite">True if older entries should be overwritten when the logger is full, defaults to false</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ILogging.Stop">
+            <summary>
+            Stop logging data
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ILogging.ClearEntries">
+            <summary>
+            Clear all stored logged data from the board.  The erase operation will not be performed until
+            you disconnect from the board.
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ILogging.DownloadAsync(System.UInt32,System.Action{System.UInt32,System.UInt32})">
+            <summary>
+            Download saved data from the flash memory with periodic progress updates
+            </summary>
+            <param name="nUpdates">How many progress updates to send during the download</param>
+            <param name="updateHandler">Handler to accept download notifications</param>
+            <returns>Task that will complete when the download has finished</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ILogging.DownloadAsync(System.Action{MbientLab.MetaWear.Core.LogDownloadError,System.Byte,System.DateTime,System.Byte[]})">
+            <summary>
+            Download saved data from the flash memory with error handling but no progress updates
+            </summary>
+            <param name="errorHandler">Handler to process encountered errors during the download</param>
+            <returns>Task that will complete when the download has finished</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ILogging.DownloadAsync(System.UInt32,System.Action{System.UInt32,System.UInt32},System.Action{MbientLab.MetaWear.Core.LogDownloadError,System.Byte,System.DateTime,System.Byte[]})">
+            <summary>
+            Download saved data from the flash memory with periodic progress updates and error handling
+            </summary>
+            <param name="nUpdates">How many progress updates to send during the download</param>
+            <param name="updateHandler">Handler to accept download notifications</param>
+            <param name="errorHandler">Handler to process encountered errors during the download</param>
+            <returns>Task that will complete when the download has finished</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ILogging.DownloadAsync">
+            <summary>
+            Download saved data from the flash memory with no progress updates nor error handling
+            </summary>
+            <returns>Task that will complete when the download has finished</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.IMacro">
+            <summary>
+            Firmware feature that saves MetaWear commands to the on-board flash memory
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IMacro.StartRecord(System.Boolean)">
+            <summary>
+            Starts macro recording.  Every MetaWear command issued will be recorded to the flash memory.
+            </summary>
+            <param name="execOnBoot">True if the commands should be executed when the board powers on, defaults to true</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IMacro.EndRecordAsync">
+            <summary>
+            Ends macro recording
+            </summary>
+            <returns>Task containing the id of the recorded task</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IMacro.Execute(System.Byte)">
+            <summary>
+            Execute the commands corresponding to the macro ID
+            </summary>
+            <param name="id">Numerical ID of the macro to execute</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.IMacro.EraseAll">
+            <summary>
+            Remove all macros on the flash memory.  The erase operation will not be performed until
+            you disconnect from the board.If you wish to reset the board after the erase operation,
+            use the <see cref="M:MbientLab.MetaWear.Core.IDebug.ResetAfterGc"/> method.
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.SensorFusionBosch.Mode">
+            <summary>
+            Supported sensor fusion modes
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.SensorFusionBosch.AccRange">
+            <summary>
+            Supported data ranges for acceleration data
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.SensorFusionBosch.GyroRange">
+            <summary>
+            Supported data ranges for gyro data
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.SensorFusionBosch.CalibrationAccuracy">
+            <summary>
+            Accuracy of the correct sensor data
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.SensorFusionBosch.CorrectedAcceleration">
+            <summary>
+            Container class holding corrected acceleration data, in units of g's
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.SensorFusionBosch.CorrectedAngularVelocity">
+            <summary>
+            Container class holding corrected angular velocity data, in degrees per second
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.SensorFusionBosch.CorrectedMagneticField">
+            <summary>
+            Container class holding corrected magnetic field strength data, in Tesla
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.SensorFusionBosch.ImuCalibrationState">
+            <summary>
+            Container class holding the calibration state of the IMU sensors
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Core.SensorFusionBosch.ImuCalibrationState.accelerometer">
+            <summary>
+            Current calibration accuracy values for the accelerometer, gyroscope, and magnetometer respectively
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Core.SensorFusionBosch.ImuCalibrationState.gyroscope">
+            <summary>
+            Current calibration accuracy values for the accelerometer, gyroscope, and magnetometer respectively
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Core.SensorFusionBosch.ImuCalibrationState.magnetometer">
+            <summary>
+            Current calibration accuracy values for the accelerometer, gyroscope, and magnetometer respectively
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.ISensorFusionBosch">
+            <summary>
+            Bosch algorithm combining accelerometer, gyroscope, and magnetometer data for Bosch sensors.  
+            <para>When using sensor fusion, do not configure the accelerometer, gyro, and magnetometer with 
+            their respective interface; the algorithm will automatically configure those sensors based on 
+            the selected fusion mode.</para>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.ISensorFusionBosch.CorrectedAcceleration">
+            <summary>
+            Data producer representing corrected acceleration data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.ISensorFusionBosch.CorrectedAngularVelocity">
+            <summary>
+            Data producer representing corrected angular velocity data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.ISensorFusionBosch.CorrectedMagneticField">
+            <summary>
+            Data producer representing corrected magnetic field data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.ISensorFusionBosch.Quaternion">
+            <summary>
+            Data producer representing quaternion data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.ISensorFusionBosch.EulerAngles">
+            <summary>
+            Data producer representing Euler angles data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.ISensorFusionBosch.Gravity">
+            <summary>
+            Data producer representing gravity data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.ISensorFusionBosch.LinearAcceleration">
+            <summary>
+            Data producer representing linear acceleration data
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISensorFusionBosch.Configure(MbientLab.MetaWear.Core.SensorFusionBosch.Mode,MbientLab.MetaWear.Core.SensorFusionBosch.AccRange,MbientLab.MetaWear.Core.SensorFusionBosch.GyroRange,System.Object[],System.Object[])">
+            <summary>
+            Configure the sensor fusion algorithm
+            </summary>
+            <param name="mode">Sensor fusion mode</param>
+            <param name="ar">Accelerometer data range</param>
+            <param name="gr">Gyro data range</param>
+            <param name="accExtra">Extra configuration settings for the accelerometer</param>
+            <param name="accGyro">Extra configuration settings for the gyro</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISensorFusionBosch.Start">
+            <summary>
+            Start the algorithm
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISensorFusionBosch.Stop">
+            <summary>
+            Stop the algorithm
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISensorFusionBosch.PullConfigAsync">
+            <summary>
+            Pulls the current sensor fusion configuration from the sensor
+            </summary>
+            <returns>Task that is completed when the settings are received</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISensorFusionBosch.ReadCalibrationStateAsync">
+            <summary>
+            Reads the current calibration state from the sensor fusion algorithm.  This function cannot be
+            called until the sensor fusion algorithm is running and is only available on firmware v1.4.1+
+            </summary>
+            <returns>Current calibrartion state</returns>
+            <exception cref="T:System.InvalidOperationException">If device is not using min required firmware</exception>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.Settings.BatteryState">
+            <summary>
+            Wrapper class encapsulating the battery state data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.Settings.BatteryState.Charge">
+            <summary>
+            Percent charged, between [0, 100]
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.Settings.BatteryState.Voltage">
+            <summary>
+            Battery voltage level in Volts (V)
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.Settings.BleAdvertisementConfig">
+            <summary>
+            Bluetooth LE advertising configuration
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.Settings.BleAdvertisementConfig.DeviceName">
+            <summary>
+            Name the device advertises as
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.Settings.BleAdvertisementConfig.Interval">
+            <summary>
+            Time between each advertise event, in milliseconds (ms)
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.Settings.BleAdvertisementConfig.Timeout">
+            <summary>
+            How long the device should advertise for with 0 indicating no timeout, in seconds (s)
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.Settings.BleAdvertisementConfig.ScanResponse">
+            <summary>
+            Scan response
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.Settings.BleConnectionParameters">
+            <summary>
+            Wrapper class containing BluetoothLe connection parameters
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.Settings.BleConnectionParameters.MinConnectionInterval">
+            <summary>
+            Minimum time the central device asks for data from the peripheral, in milliseconds (ms)
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.Settings.BleConnectionParameters.MaxConnectionInterval">
+            <summary>
+            Maximum time the central device asks for data from the peripheral, in milliseconds (ms)
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.Settings.BleConnectionParameters.SlaveLatency">
+            <summary>
+            How many times the peripheral can choose to discard data requests from the central device
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.Settings.BleConnectionParameters.SupervisorTimeout">
+            <summary>
+            Timeout from the last data exchange until the ble link is considered lost
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Core.ISettings">
+            <summary>
+            Configures Bluetooth settings and auxiliary hardware and firmware features
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.ISettings.Battery">
+            <summary>
+            Data producer representing the battery state
+            <para>This property returns null if the current board or firmware does not report battery information</para>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.ISettings.PowerStatus">
+            <summary>
+            Data producer representing the power status.
+            <para>This property returns null if the current board or firmware does not support power status notifications</para>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Core.ISettings.ChargeStatus">
+            <summary>
+            <para>This property returns null if the current board or firmware does not support charge status notifications</para>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISettings.ReadBleAdConfigAsync">
+            <summary>
+            Read the current ble advertising configuration
+            </summary>
+            <returns>Object representing the ad config</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISettings.ReadBleConnParamsAsync">
+            <summary>
+            Read the current ble connection parameters
+            </summary>
+            <returns>Object representing the ble connection parameters</returns>
+            <exception cref="T:System.NotSupportedException">If the firmware revision does not support ble connection parameters</exception>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISettings.ReadTxPowerAsync">
+            <summary>
+            Reads the radio's current transmitting power
+            </summary>
+            <returns>Tx power</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISettings.SetTxPower(System.SByte)">
+            <summary>
+            Sets the radio's transmitting power
+            </summary>
+            <param name="power">One of: 4, 0, -4, -8, -12, -16, -20, or -30</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISettings.EditBleConnParams(System.Single,System.Single,System.UInt16,System.UInt16)">
+            <summary>
+            Edit the ble connection parameters
+            </summary>
+            <param name="minConnInterval">Lower bound of the connection interval, min 7.5ms</param>
+            <param name="maxConnInterval">Upper bound of the connection interval, max 4000ms</param>
+            <param name="slaveLatency">Number of connection intervals to skip, between [0, 1000]</param>
+            <param name="supervisorTimeout">Maximum amount of time between data exchanges until the connection is considered to be lost, between [10, 32000] ms</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISettings.EditBleAdConfig(System.String,System.Nullable{System.Byte},System.Nullable{System.UInt16},System.Byte[])">
+            <summary>
+            Edit the ble advertising configuration
+            </summary>
+            <param name="name">Advertising name, max of 8 ASCII characters</param>
+            <param name="timeout">Time between advertise events, in milliseconds (ms)</param>
+            <param name="interval">How long to advertise for, between [0, 180] seconds where 0 indicates no timeout</param>
+            <param name="scanResponse">Custom scan response packet</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISettings.StartBleAdvertising">
+            <summary>
+            Starts ble advertising
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Core.ISettings.OnDisconnectAsync(System.Action)">
+            <summary>
+            Programs a task to the board that will be executed when a disconnect occurs
+            </summary>
+            <param name="commands">MetaWear commands composing the task</param>
+            <returns>Observer object representing the task</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Data.Acceleration">
+            <summary>
+            Encapsulates acceleration data, values are represented in g's
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Data.AngularVelocity">
+            <summary>
+            Encapsulates angular velocity data, values are in degrees per second
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Data.EulerAngles">
+            <summary>
+            Encapsulates Euler angles, values are in degrees
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Data.FloatVector">
+            <summary>
+            Generic container holding a vector of float values
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Data.MagneticField">
+            <summary>
+            Encapsulates magnetic field strength data, values are in Tesla (g)
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Data.Quaternion">
+            <summary>
+            Encapsulates a quaternion in the form q = w + x<b>i</b> + y<b>j</b> + z<b>k</b>
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Data.SensorOrientation">
+            <summary>
+            Enumeration of sensor orientations
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Data.TapType">
+            <summary>
+            Tap types to detect
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.DeviceInformation">
+            <summary>
+            Wrapper class holding Characteristics under the
+            <a href = "https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.service.device_information.xml" > Device Information</a>
+            GATT service
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.DeviceInformation.Manufacturer">
+            <summary>
+            Device's manufacturer name, characteristic 0x2A29
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.DeviceInformation.ModelNumber">
+            <summary>
+            Model number assigned by MbientLab, characteristic 0x2A24
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.DeviceInformation.SerialNumber">
+            <summary>
+            Device's serial number, characteristic 0x2A25
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.DeviceInformation.FirmwareRevision">
+            <summary>
+            Revision of the firmware on the device, characteristic 0x2A26
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.DeviceInformation.HardwareRevision">
+            <summary>
+            Revision of the hardware on the device, characteristic 0x2A27
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.IActiveDataProducer`1">
+            <summary>
+            A type DataProducer that is always producing data and is not user controlled.
+            </summary>
+            <typeparam name="T">Type that the raw value should be interpreted as</typeparam>
+        </member>
+        <member name="M:MbientLab.MetaWear.IActiveDataProducer`1.ReadAsync">
+            <summary>
+            Reads the current value of the producer
+            </summary>
+            <returns>Current value</returns>
+            <exception cref="T:System.TimeoutException">If task takes longer than 250ms to complete</exception>
+        </member>
+        <member name="T:MbientLab.MetaWear.IAnonymousRoute">
+            <summary>
+            Pared down variant of the <see cref="T:MbientLab.MetaWear.IRoute"/> interface that only has one subscriber.
+            </summary>
+            <para>
+            This interface is used to retrieve logged data from a board that was not programmed 
+            by the current device.
+            </para>
+        </member>
+        <member name="P:MbientLab.MetaWear.IAnonymousRoute.Identifier">
+            <summary>
+            String identifying the data producer chain the route is receiving data from
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IAnonymousRoute.Subscribe(System.Action{MbientLab.MetaWear.IData})">
+            <summary>
+            Subscribe to the data produced by this chain
+            </summary>
+            <param name="subscriber">Subscriber implementation to handle the received data</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.IAsyncDataProducer">
+            <summary>
+            Data producer that emits data only when new data is available.  
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IAsyncDataProducer.Start">
+            <summary>
+            Begin data collection
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IAsyncDataProducer.Stop">
+            <summary>
+            End data collection
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.IData">
+            <summary>
+            A sample of sensor data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IData.Types">
+            <summary>
+            Types that can be used to extract the values from the IData object
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IData.Bytes">
+            <summary>
+            Raw byte representation of the data value
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IData.Timestamp">
+            <summary>
+            Time of when the data was received (streaming) or created (logging)
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IData.FormattedTimestamp">
+            <summary>
+            String representation of the timestamp in the format <code>YYYY-MM-DDTHH:MM:SS.LLL</code>.  The timezone
+            of the string will be the local device's current timezone.
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IData.Scale">
+            <summary>
+            LSB to units ratio.  Only used if developer is manually type casting the returned byte array from
+            the <see cref="P:MbientLab.MetaWear.IData.Bytes"/> property
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IData.Extra``1">
+            <summary>
+            Extra information attached to this data sample
+            </summary>
+            <typeparam name="T">Type to cast the return value as</typeparam>
+            <returns>Extra information as the specified type</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IData.Value``1">
+            <summary>
+            Converts the data bytes to a usable data type
+            </summary>
+            <typeparam name="T">Type to cast the return value as</typeparam>
+            <returns>Data value as the specified type</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.IDataProducer">
+            <summary>
+            A component that creates data, such as firmware features (battery level reporting) or sensors
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IDataProducer.AddRouteAsync(System.Action{MbientLab.MetaWear.Builder.IRouteComponent})">
+            <summary>
+            Adds a data route to the producer
+            </summary>
+            <param name="builder">Builder object to construct the route</param>
+            <returns>Object representing the created route</returns>
+            <exception cref="T:System.TimeoutException">If creating reaction, loggers, or data processors takes too long</exception>
+            <exception cref="T:MbientLab.MetaWear.IllegalRouteOperationException">If an invalid combination of route components are used</exception>
+        </member>
+        <member name="T:MbientLab.MetaWear.IDataToken">
+            <summary>
+            Dummy class representing a sample of sensor data within the context of programming
+            advanced reactions in a data route.
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IDataToken.Slice(System.Byte,System.Byte)">
+            <summary>
+            Creates a <code>DataToken</code> copy that represents a portion of the original data
+            </summary>
+            <param name="offset">Byte to start copying from</param>
+            <param name="length">Number of bytes to copy</param>
+            <returns></returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.IForcedDataProducer">
+            <summary>
+            A data producer that only emits data when a <see cref="M:MbientLab.MetaWear.IForcedDataProducer.Read"/> command is issued.
+            <para>Read commands can be scheduled on the MetaWear using 
+            <see cref="M:MbientLab.MetaWear.IMetaWearBoard.ScheduleAsync(System.UInt32,System.Boolean,System.Action)"/> to avoid having to 
+            repeatedly send the command from the local device.</para>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IForcedDataProducer.Read">
+            <summary>
+            Sends a read command to the producer
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.IllegalRouteOperationException">
+            <summary>
+            Exception indicating that an invalid combination of route components was used.
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.IModule">
+            <summary>
+            Sensor, peripheral, or firmware feature
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.IScheduledTask">
+            <summary>
+            A task comprising of MetaWear commands programmed to periodically run on-board
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IScheduledTask.Valid">
+            <summary>
+            True if this object is still useable, discard if false
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IScheduledTask.ID">
+            <summary>
+            Numerical ID representing this object, used with <see cref="M:MbientLab.MetaWear.IMetaWearBoard.LookupScheduledTask(System.Byte)"/>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IScheduledTask.Start">
+            <summary>
+            Start task execution
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IScheduledTask.Stop">
+            <summary>
+            Stop task execution
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IScheduledTask.Remove">
+            <summary>
+            Removes this task from the board
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.IMetaWearBoard">
+            <summary>
+            Software representation of all MbientLab sensor boards.
+            <para>Call <see cref="M:MbientLab.MetaWear.IMetaWearBoard.InitializeAsync"/> before using any other functions or reading the properties.</para>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IMetaWearBoard.MacAddress">
+            <summary>
+            Unique MAC address identifying the board
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IMetaWearBoard.InMetaBootMode">
+            <summary>
+            True if the board is in MetaBoot (bootloader) mode.  
+            <para>If it is, you will not be able to interact with the board except to update firmware</para>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IMetaWearBoard.Model">
+            <summary>
+            Gets the model of the connected board, returns null if unable to determine
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IMetaWearBoard.ModelString">
+            <summary>
+            Gets the string representation of the board's model, null if unable to determine
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IMetaWearBoard.OnUnexpectedDisconnect">
+            <summary>
+            Called when the connection is unexpectedly lost i.e. not requested by the API
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IMetaWearBoard.TimeForResponse">
+            <summary>
+            How long the API should wait (in milliseconds) before a required response is received
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IMetaWearBoard.IsConnected">
+            <summary>
+            True if the board is currently connected to the host device
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.InitializeAsync">
+            <summary>
+            Connect to the remote device and perpares the internal API state to communicate with the modules.
+            </summary>
+            <param name="timeout">How long to wait (in milliseconds) for initialization to complete</param>
+            <returns>Null once the SDK is initialized</returns>
+            <exception cref="T:System.TimeoutException">If initialization takes too long, timeout can be increased with the <see cref="P:MbientLab.MetaWear.IMetaWearBoard.TimeForResponse"/> property</exception>
+            <exception cref="T:System.InvalidOperationException">If the host device failed to establish a connection</exception>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.DisconnectAsync">
+            <summary>
+            Disconnects from the MetaWear device
+            <para>This method is only meaningful for non Windows 10 applications due to quirks with Win10's BLE stack.  For consistent behavior across all platforms, 
+            use the <see cref="M:MbientLab.MetaWear.Core.IDebug.DisconnectAsync"/> instead to terminate the connection</para>
+            </summary>
+            <returns>Null when the connection is closed</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.ReadDeviceInformationAsync">
+            <summary>
+            Reads supported characteristics from the Device Information service
+            </summary>
+            <returns>Object encapsulating the device information</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.ReadBatteryLevelAsync">
+            <summary>
+            Reads the battery level characteristic
+            </summary>
+            <returns>Value of the characteristic</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.GetModule``1">
+            <summary>
+            Retrieves a reference to the requested module if supported.
+            <para>The API must be initialized before calling this function and it cannot be used if the board 
+            is in MetaBoot mode.</para>
+            </summary>
+            <typeparam name="T">Interface derived from <see cref="T:MbientLab.MetaWear.IModule"/> to lookup</typeparam>
+            <returns>Reference to the requested module, null if the board is not connected, module not supported, or board is in MetaBoot mode</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.GetModuleInfoAsync(System.Collections.IDictionary)">
+            <summary>
+            Queries all info registers.  If the task times out, you can run the task again using the partially
+            completed result from the previous execution so the function does not need to query all modules again.
+            </summary>
+            <param name="partial">Result of previously queried module info results, set to null to query all modules</param>
+            <returns>Module information contained in a string indexed dictionary</returns>
+            <exception cref="T:MbientLab.MetaWear.TaskTimeoutException">If the module responses take too long, partial result is included with this exception</exception>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.SerializeAsync">
+            <summary>
+            Serialize object state and write the state to the local disk
+            </summary>
+            <returns>Null when the object state is saved</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.DeserializeAsync">
+            <summary>
+            Restore serialized state from the local disk if available
+            </summary>
+            <returns>Null when the object state is restored</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.ScheduleAsync(System.UInt32,System.UInt16,System.Boolean,System.Action)">
+            <summary>
+            Schedule a task to be indefinitely executed on-board at fixed intervals for a specific number of repetitions
+            </summary>
+            <param name="period">How often to execute the task, in milliseconds</param>
+            <param name="repititions">How many times to execute the task</param>
+            <param name="delay">True if first execution should be delayed by one period</param>
+            <param name="commands">MetaWear commands comprising the task</param>
+            <returns><see cref="T:MbientLab.MetaWear.IScheduledTask"/> object representing the newly scheduled task</returns>
+            <exception cref="T:System.TimeoutException">If creating the timer or programming the commands timed out</exception>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.ScheduleAsync(System.UInt32,System.Boolean,System.Action)">
+            <summary>
+            Schedule a task to be indefinitely executed on-board at fixed intervals indefinitely
+            </summary>
+            <param name="period">How often to execute the task, in milliseconds</param>
+            <param name="delay">True if first execution should be delayed by one period</param>
+            <param name="commands">MetaWear commands comprising the task</param>
+            <returns><see cref="T:MbientLab.MetaWear.IScheduledTask"/> object representing the newly scheduled task</returns>
+            <exception cref="T:System.TimeoutException">If creating the timer or programming the commands timed out</exception>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.LookupScheduledTask(System.Byte)">
+            <summary>
+            Retrieves a scheduled task
+            </summary>
+            <param name="id">Numerical ID to lookup</param>
+            <returns><see cref="T:MbientLab.MetaWear.IScheduledTask"/> corresonding to the specified ID, null if non can be found</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.CreateAnonymousRoutesAsync">
+            <summary>
+            Reads the current state of the board and creates anonymous routes based on what data is being logged
+            </summary>
+            <returns>List of created anonymous route objects</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.LookupObserver(System.UInt32)">
+            <summary>
+            Retrieves an observer
+            </summary>
+            <param name="id">Numerical ID to look up</param>
+            <returns><see cref="T:MbientLab.MetaWear.IObserver"/> corresponding to the specified ID, null if none can be found</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.LookupRoute(System.UInt32)">
+            <summary>
+            Retrieves a route
+            </summary>
+            <param name="id">Numerical ID to look up</param>
+            <returns><see cref="T:MbientLab.MetaWear.IRoute"/> corresponding to the specified ID, null if none can be found</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IMetaWearBoard.TearDown">
+            <summary>
+            Removes all routes and resources allocated on the board (observers, data processors, timers, and loggers)
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Impl.MetaWearBoard">
+            <summary>
+            Implmementation of the <see cref="T:MbientLab.MetaWear.IMetaWearBoard"/> interface by MbientLab
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Impl.MetaWearBoard.OnError">
+            <summary>
+            Sets a handler to receive any internal errors
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Impl.Platform.BatteryService">
+            <summary>
+            Characteristics under the Battery GATT service
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Impl.Platform.BatteryService.BATTERY_LEVEL">
+            <summary>
+            Battery level characteristic
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Impl.Platform.DeviceInformationService">
+            <summary>
+            Manufacturer and/or vendor information about a device
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Impl.Platform.DeviceInformationService.FIRMWARE_REVISION">
+            <summary>
+            Revision for the firmware within the device
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Impl.Platform.DeviceInformationService.MODEL_NUMBER">
+            <summary>
+            Model number that is assigned by the device
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Impl.Platform.DeviceInformationService.HARDWARE_REVISION">
+            <summary>
+            Revision for the hardware within the device
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Impl.Platform.DeviceInformationService.MANUFACTURER_NAME">
+            <summary>
+            Name of the manufacturer of the device
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Impl.Platform.DeviceInformationService.SERIAL_NUMBER">
+            <summary>
+            Serial number for a particular instance of the device
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Impl.Platform.GattCharWriteType">
+            <summary>
+            GATT characteristic write types
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Impl.Platform.IBluetoothLeGatt">
+            <summary>
+            Bluetooth GATT operations used by the API, must be implemented by the target platform.
+            <para>Before interacting with any of the characteristics, users must first call <see cref="M:MbientLab.MetaWear.Impl.Platform.IBluetoothLeGatt.DiscoverServicesAsync"/></para>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Impl.Platform.IBluetoothLeGatt.BluetoothAddress">
+            <summary>
+            Device's mac address, as an unsigned long
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Impl.Platform.IBluetoothLeGatt.OnDisconnect">
+            <summary>
+            Handler to process disconnect events
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Impl.Platform.IBluetoothLeGatt.DiscoverServicesAsync">
+            <summary>
+            Discover GATT services and characteristics avaiable on the remote device
+            </summary>
+            <returns>Null when discovery is completed</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Impl.Platform.IBluetoothLeGatt.ServiceExistsAsync(System.Guid)">
+            <summary>
+            Checks if a GATT service exists
+            </summary>
+            <param name="serviceGuid">UUID identifying the service to lookup</param>
+            <returns>True if service exists, false if not</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Impl.Platform.IBluetoothLeGatt.ReadCharacteristicAsync(System.Tuple{System.Guid,System.Guid})">
+            <summary>
+            Reads the requested characteristic's value
+            </summary>
+            <param name="gattChar">Characteristic to read</param>
+            <returns>Characteristic's value</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Impl.Platform.IBluetoothLeGatt.WriteCharacteristicAsync(System.Tuple{System.Guid,System.Guid},MbientLab.MetaWear.Impl.Platform.GattCharWriteType,System.Byte[])">
+            <summary>
+            Writes a GATT characteristic and its value to the remote device
+            </summary>
+            <param name="gattChar">GATT characteristic to write</param>
+            <param name="writeType">Type of GATT write to use</param>
+            <param name="value">Value to be written</param>
+            <returns>Null when the task is completed</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Impl.Platform.IBluetoothLeGatt.EnableNotificationsAsync(System.Tuple{System.Guid,System.Guid},System.Action{System.Byte[]})">
+            <summary>
+            Enable notifications for the characteristic
+            </summary>
+            <param name="gattChar">Characteristic to enable notifications for</param>
+            <param name="handler">Listener for handling characteristic notifications</param>
+            <returns>Null when the task is completed</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Impl.Platform.IBluetoothLeGatt.DisconnectAsync">
+            <summary>
+            Closes the Bluetooth LE connection
+            </summary>
+            <returns>Null when connection is lost</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Impl.Platform.ILibraryIO">
+            <summary>
+            IO operations used by the API, must be implemented by the target platform
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Impl.Platform.ILibraryIO.LocalSaveAsync(System.String,System.Byte[])">
+            <summary>
+            Save the data to the local device
+            </summary>
+            <param name="key">Key value identifying the data</param>
+            <param name="data">Data to save</param>
+            <returns>Null</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Impl.Platform.ILibraryIO.LocalLoadAsync(System.String)">
+            <summary>
+            Retrieves locally saved data from the host device
+            </summary>
+            <param name="key">Key value identifying the data</param>
+            <returns>Stream to read the data</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.IObserver">
+            <summary>
+            Monitors an on-board event and executes the corresponding MetaWear commands when its event is fired
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IObserver.Valid">
+            <summary>
+            True if this object is still useable, discard if false
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IObserver.ID">
+            <summary>
+            Unique value identifying the observer.  
+            <para>Use with <see cref="M:MbientLab.MetaWear.IMetaWearBoard.LookupObserver(System.UInt32)"/> to retrive an existing observer</para>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IObserver.Remove">
+            <summary>
+            Removes the observer from the board marks the object as invalid
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.IRoute">
+            <summary>
+            Defines how data flows from a data producer to an endpoint
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IRoute.ID">
+            <summary>
+            Unique value identifying the route.  
+            <para>Use with <see cref="M:MbientLab.MetaWear.IMetaWearBoard.LookupRoute(System.UInt32)"/> to retrive an existing route</para>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IRoute.Valid">
+            <summary>
+            True if this object is still useable, discard if false
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.IRoute.Subscribers">
+            <summary>
+            Array data subscribers associated with the <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Stream(System.Action{MbientLab.MetaWear.IData})"/> and <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Log"/> components.
+            <para>
+            The array is ordered to match the order in which the <code>Stream</code> and <code>Log</code> components 
+            are added in the route builder
+            </para>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.IRoute.LookupSubscriber(System.String)">
+            <summary>
+            Retrieve the subscriber associated with the user defined name.
+            </summary>
+            <param name="name">Value that matches the parameter given to <see cref="M:MbientLab.MetaWear.Builder.IRouteComponent.Name(System.String)"/> component</param>
+            <returns>Object corresponding to the name, null if no subscriber can be found</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.IRoute.Remove">
+            <summary>
+            Removes the route and marks the object as invalid
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.ISubscriber">
+            <summary>
+            Represents a <code>Stream</code> or <code>Log</code> component added in a route builder
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.ISubscriber.Identifier">
+            <summary>
+            String identifying the data producer chain the subscriber is receiving data from.
+            <para>
+            This value can be matched with the <see cref="P:MbientLab.MetaWear.IAnonymousRoute.Identifier"/> property if syncing 
+            logged data with the <see cref="T:MbientLab.MetaWear.IAnonymousRoute"/> interface.
+            </para>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.ISubscriber.Attach(System.Action{MbientLab.MetaWear.IData})">
+            <summary>
+            Assigns a handler for the received data
+            </summary>
+            <param name="handler">Handler to process the received data</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.ISubscriber.Listen(System.Action{MbientLab.MetaWear.IData})">
+            <summary>
+            Activates the subscriber and assigns a handler for the received data
+            </summary>
+            <param name="handler">Handler to process the received data, null if existing handler should be used</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.ISubscriber.Quiet">
+            <summary>
+            Quiets the streamed data the subscriber is listening to, does nothing if the subcriber is listening to logged data
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Model">
+            <summary>
+            Sensor board models available from MbientLab
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.Gpio.PinChangeType">
+            <summary>
+            Pin change types
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Peripheral.Gpio.PinChangeType.Rising">
+            <summary>
+            Notify on the rising edge during a change
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Peripheral.Gpio.PinChangeType.Falling">
+            <summary>
+            Notify on the falling edge during a change
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Peripheral.Gpio.PinChangeType.Any">
+            <summary>
+            Notify on any edge during a change
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.Gpio.PullMode">
+            <summary>
+            Input pin configuration types
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.Gpio.IAnalogDataProducer">
+            <summary>
+            Data producer representing analog data from a gpio pin
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.Gpio.IAnalogDataProducer.Read(System.Byte,System.Byte,System.UInt16)">
+            <summary>
+            Issues a read command to the analog pin
+            </summary>
+            <param name="pullup">Pin to be pulled up before the read, unused by default</param>
+            <param name="pulldown">Pin to be pulled down before the read, unused by default</param>
+            <param name="delay">How long to wait before reading from the pin, no delay by default</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.Gpio.IPin">
+            <summary>
+            Physical GPIO pin on the board
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.Gpio.IPin.Adc">
+            <summary>
+            Data producer representing analog ADC data.  Not all pins support analog inputs, property is null is unsupported
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.Gpio.IPin.AbsoluteReference">
+            <summary>
+            Data producer representing absolute reference data.  Not all pins support analog inputs, property is null is unsupported
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.Gpio.IPin.Digital">
+            <summary>
+            Data producer representing digital data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.Gpio.IPin.Monitor">
+            <summary>
+            Data producer representing pin monitoring data
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.Gpio.IPin.SetChangeType(MbientLab.MetaWear.Peripheral.Gpio.PinChangeType)">
+            <summary>
+            Set the pin change type to look for
+            </summary>
+            <param name="type">New pin change type</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.Gpio.IPin.SetPullMode(MbientLab.MetaWear.Peripheral.Gpio.PullMode)">
+            <summary>
+            Set the pin pull mode
+            </summary>
+            <param name="mode">New pull mode</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.Gpio.IPin.ClearOutput">
+            <summary>
+            Clear the pin's output voltage i.e. logical low
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.Gpio.IPin.SetOutput">
+            <summary>
+            Set the pin's output voltage i.e. logical high
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.Gpio.IPin.CreateVirtualPin(System.Byte)">
+            <summary>
+            Creates a virtual pin
+            </summary>
+            <param name="pin">Pin number to associate the virtual pin with, between [Pins.Length, 254]</param>
+            <returns>Object representing the virtual pin</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.Gpio.IVirtualPin">
+            <summary>
+            Abstract pin used for handling gpio reads with different parameters
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.Gpio.IVirtualPin.Adc">
+            <summary>
+            Data producer representing analog ADC data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.Gpio.IVirtualPin.AbsoluteReference">
+            <summary>
+            Data producer representing absolute reference data
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.IGpio">
+            <summary>
+            General purpose I/O pins for connecting external sensors
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.IGpio.Pins">
+            <summary>
+            All physical GPIO pins on the board
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.IHaptic">
+            <summary>
+            Provides haptic feedback in the form of a vibrational motor or buzzer
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.IHaptic.StartMotor(System.UInt16,System.Single)">
+            <summary>
+            Start pulsing a motor
+            </summary>
+            <param name="pulseWidth">How long to run the motor, in milliseconds (ms)</param>
+            <param name="dutyCycle">Strength of the motor, defaults to 100%</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.IHaptic.StartBuzzer(System.UInt16)">
+            <summary>
+            Start pulsing a buzzer
+            </summary>
+            <param name="pulseWidth">How long to run the buzzer, in milliseconds (ms)</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.IBeacon.Configuration">
+            <summary>
+            Wrapper class encapsulating the IBeacon configuration
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.IBeacon.Configuration.Uuid">
+            <summary>
+            Advertising UUID
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.IBeacon.Configuration.Major">
+            <summary>
+            Advertising major value
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.IBeacon.Configuration.Minor">
+            <summary>
+            Advertising minor value
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.IBeacon.Configuration.Period">
+            <summary>
+            Advertising period
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.IBeacon.Configuration.RxPower">
+            <summary>
+            Advertising receiving power
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.IBeacon.Configuration.TxPower">
+            <summary>
+            Advertising transmitting power
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.IIBeacon">
+            <summary>
+            Apple developed protocol for Bluetooth LE proximity sensing
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.IIBeacon.Enable">
+            <summary>
+            Enable IBeacon advertising.  You will need to disconnect from the board to advertise as an IBeacon
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.IIBeacon.Disable">
+            <summary>
+            Disable IBeacon advertising
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.IIBeacon.Configure(System.Nullable{System.Guid},System.Nullable{System.UInt16},System.Nullable{System.UInt16},MbientLab.MetaWear.IDataToken,MbientLab.MetaWear.IDataToken,System.Nullable{System.SByte},System.Nullable{System.SByte},System.Nullable{System.UInt16})">
+            <summary>
+            Configure IBeacon advertising settings.  Parameters that are not set will be ignored.
+            </summary>
+            <param name="uuid">IBeacon UUID</param>
+            <param name="major">IBeacon major value, takes precedence over the <code>majorToken</code> parameter</param>
+            <param name="majorToken">Data token representing the sensor data to use as the new major value</param>
+            <param name="minor">IBeacon minor value, takes precedence over the <code>minorToken</code> parameter</param>
+            <param name="minorToken">Data token representing the sensor data to use as the new minor value</param>
+            <param name="txPower">IBeacon transmitting power</param>
+            <param name="rxPower">IBeacon receiving power</param>
+            <param name="period">IBeacon advertising period, in milliseconds (ms)</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.IIBeacon.ReadConfigAsync">
+            <summary>
+            Read the current IBeacon configuration
+            </summary>
+            <returns>IBeacon configuration</returns>
+            <exception cref="T:System.TimeoutException">If the read takes too long</exception>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.Led.Color">
+            <summary>
+            Available LED colors
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.Led.Pattern">
+            <summary>
+            Preconfigured LED patterns 
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.ILed">
+            <summary>
+            Ultra bright RGB light emitting diode
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ILed.EditPattern(MbientLab.MetaWear.Peripheral.Led.Color,System.Byte,System.Byte,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.UInt16,System.Byte)">
+            <summary>
+            Edit the pattern attributes for the desired color.  All parameters except the color are optional and 
+            if not set, will default to 0 except the count parameter which defaults an indefinite count.
+            </summary>
+            <param name="color">Color to configure</param>
+            <param name="high">Intensity value of the high state</param>
+            <param name="low">Intensity value of the low state</param>
+            <param name="riseTime">Transition time from low to high state, in milliseconds (ms)</param>
+            <param name="highTime">How long the pulse stays in the high state, in milliseconds (ms)</param>
+            <param name="fallTime">Transition time from high to low state, in milliseconds (ms)</param>
+            <param name="duration">Length of one pulse, in milliseconds (ms)</param>
+            <param name="delay">How long to wait before starting the pattern, in milliseconds (ms), ignored on boards running firmware older than v1.2.3</param>
+            <param name="count">How many times to repeat a pulse pattern</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ILed.EditPattern(MbientLab.MetaWear.Peripheral.Led.Color,MbientLab.MetaWear.Peripheral.Led.Pattern,System.UInt16,System.Byte)">
+            <summary>
+            Apply a preset pattern to the desired color
+            </summary>
+            <param name="color">Color to configure</param>
+            <param name="pattern">Preconfigured preset to use</param>
+            <param name="delay">Set how long to wait before starting the pattern, defaults to 0.  This setting is ignored 
+            on boards running firmware older than v1.2.3</param>
+            <param name="count">Set how many times to repeat a pulse pattern, defaults to indefinite</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ILed.AutoPlay">
+            <summary>
+            Play any programmed patterns and immediately plays patterns programmed later
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ILed.Play">
+            <summary>
+            Play any programmed patterns
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ILed.Pause">
+            <summary>
+            Pause the pattern playback
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ILed.Stop(System.Boolean)">
+            <summary>
+            Stop playing LED patterns
+            </summary>
+            <param name="clear">True if the patterns should be cleared as well</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.NeoPixel.ColorOrdering">
+            <summary>
+            Color ordering for the NeoPixel color values
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.NeoPixel.StrandSpeed">
+            <summary>
+            Operating speeds for a NeoPixel strand
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.NeoPixel.RotationDirection">
+            <summary>
+            Enumeration of rotation directions
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.NeoPixel.IStrand">
+            <summary>
+            Represents a NeoPixel strand
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.NeoPixel.IStrand.NLeds">
+            <summary>
+            Number of LEDs initialized for the strand
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.NeoPixel.IStrand.Free">
+            <summary>
+            Free resources allocated by the firmware for this strand.  After calling free, this object is no longer valid and should be discarded
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.NeoPixel.IStrand.Hold">
+            <summary>
+            Enables strand holding.  When enabled, the strand will not refresh with any LED changes until the hold 
+            is disabled.This allows you to form complex LED patterns without having the strand refresh with partial changes.
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.NeoPixel.IStrand.Release">
+            <summary>
+            Disables strand holding.  The strand will be refreshed with any LED changes programmed while the hold was active.
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.NeoPixel.IStrand.Clear(System.Byte,System.Byte)">
+            <summary>
+            Clears the LEDs in the given range
+            </summary>
+            <param name="start">Led index to start clearing from</param>
+            <param name="end">Led index to clear to, exclusive</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.NeoPixel.IStrand.SetRgb(System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Set and LED's rgb values
+            </summary>
+            <param name="index">LED index to set, from [0, nLeds - 1]</param>
+            <param name="red">Red value, between [0, 255]</param>
+            <param name="green">Green value, between [0, 255]</param>
+            <param name="blue">Blue value, between [0, 255]</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.NeoPixel.IStrand.Rotate(MbientLab.MetaWear.Peripheral.NeoPixel.RotationDirection,System.UInt16,System.Byte)">
+            <summary>
+            Rotate the LED color patterns on a strand
+            </summary>
+            <param name="direction">Rotation direction</param>
+            <param name="period">Amount of time, in milliseconds (ms), between rotations</param>
+            <param name="repetitions">Number of times to repeat the rotation, defaults to indefinite</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.NeoPixel.IStrand.StopRotation">
+            <summary>
+            Stops the LED rotation
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.INeoPixel">
+            <summary>
+            A brand of RGB led strips by Adafruit
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.INeoPixel.InitializeStrand(System.Byte,MbientLab.MetaWear.Peripheral.NeoPixel.ColorOrdering,MbientLab.MetaWear.Peripheral.NeoPixel.StrandSpeed,System.Byte,System.Byte)">
+            <summary>
+            Initialize memory on the MetaWear board for a NeoPixel strand
+            </summary>
+            <param name="id">Strand number (id) to initialize, can be in the range [0, 2]</param>
+            <param name="ordering">Color ordering format</param>
+            <param name="speed">Operating speed</param>
+            <param name="gpioPin">GPIO pin the strand is connected to</param>
+            <param name="nLeds">Number of LEDs to use</param>
+            <returns>Object representing the initialized strand</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.INeoPixel.LookupStrand(System.Byte)">
+            <summary>
+            Find the object corresponding to the strand number
+            </summary>
+            <param name="id">Index the virtual pin is using</param>
+            <returns>Object representing the strand, null if not found</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.SerialPassthrough.SpiFrequency">
+            <summary>
+            Supported SPI frequencies
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.SerialPassthrough.II2CDataProducer">
+            <summary>
+            Data producer representing data from the I2C bus
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.SerialPassthrough.II2CDataProducer.Read(System.Byte,System.Byte)">
+            <summary>
+            Read data via the I2C bus
+            </summary>
+            <param name="deviceAddr">Device to read from</param>
+            <param name="registerAddr">Device's register to read</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.SerialPassthrough.ISPIDataProducer">
+            <summary>
+            Data received from the SPI bus
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.SerialPassthrough.ISPIDataProducer.Read(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,MbientLab.MetaWear.Peripheral.SerialPassthrough.SpiFrequency,System.Byte[],System.Boolean,System.Boolean)">
+            <summary>
+            Read data via the SPI bus
+            </summary>
+            <param name="slaveSelectPin">Pin for slave select</param>
+            <param name="clockPin">Pin for serial clock</param>
+            <param name="mosiPin">Pin for master output, slave input</param>
+            <param name="misoPin">Pin for master input, slave output</param>
+            <param name="mode">SPI operating mode, see <a href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus#Mode_numbers">SPI Wiki Page</a></param>
+            <param name="frequency">SPI operating frequency</param>
+            <param name="data">Data to write to the device before the read, defaults to null</param>
+            <param name="lsbFirst">True to have LSB sent first, defaults to true</param>
+            <param name="useNativePins">True to use the nRF pin mappings rather than the GPIO pin mappings, defaults to true</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.ISerialPassthrough">
+            <summary>
+            Bridge for serial communication to connected sensors
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ISerialPassthrough.I2C(System.Byte,System.Byte)">
+            <summary>
+            Get an object representing the I2C data corresponding to the id.  If the id value cannot be matched
+            with an existing object, the API will create a new object using the <code>length</code>
+            parameter otherwise the existing object will be returned
+            </summary>
+            <param name="id">Value representing the i2c data, between [0, 254]</param>
+            <param name="length">Expected length of the data</param>
+            <returns>Object representing I2C data</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ISerialPassthrough.WriteI2C(System.Byte,System.Byte,System.Byte[])">
+            <summary>
+            Write data to a connected device via the I2C bus.
+            </summary>
+            <param name="deviceAddr">Device to write to</param>
+            <param name="registerAddr">Device's register to write to</param>
+            <param name="data">Data to write, up to 10 bytes</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ISerialPassthrough.ReadI2CAsync(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Read data from a sensor via the I2C bus.  Unlike <see cref="M:MbientLab.MetaWear.Peripheral.SerialPassthrough.II2CDataProducer.Read(System.Byte,System.Byte)"/>, this function provides
+            a direct way to access I2C data as opposed to creating a data route.
+            </summary>
+            <param name="deviceAddr">Address of the slave device</param>
+            <param name="registerAddr">Register on the slave device to access</param>
+            <param name="length">How many bytes to read</param>
+            <returns>Data read via the I2C bus</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ISerialPassthrough.SPI(System.Byte,System.Byte)">
+             <summary>
+             Get an object representing the SPI data corresponding to the id.  If the id value cannot be matched
+             with an existing object, the API will create a new object using the <code>length</code>
+            parameter otherwise the existing object will be returned
+             </summary>
+             <param name="id">Value representing the i2c data, between [0, 14]</param>
+             <param name="length">Expected length of the data</param>
+             <returns>Object representing SPI data</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ISerialPassthrough.WriteSPI(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,MbientLab.MetaWear.Peripheral.SerialPassthrough.SpiFrequency,System.Byte[],System.Boolean,System.Boolean)">
+            <summary>
+            Write data to a connected device via the SPI bus
+            </summary>
+            <param name="slaveSelectPin">Pin for slave select</param>
+            <param name="clockPin">Pin for serial clock</param>
+            <param name="mosiPin">Pin for master output, slave input</param>
+            <param name="misoPin">Pin for master input, slave output</param>
+            <param name="mode">SPI operating mode, see <a href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus#Mode_numbers">SPI Wiki Page</a></param>
+            <param name="frequency">SPI operating frequency</param>
+            <param name="data">Data to write to the device</param>
+            <param name="lsbFirst">True to have LSB sent first, defaults to true</param>
+            <param name="useNativePins">True to use the nRF pin mappings rather than the GPIO pin mappings, defaults to true</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Peripheral.ISerialPassthrough.ReadSPIAsync(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,MbientLab.MetaWear.Peripheral.SerialPassthrough.SpiFrequency,System.Byte[],System.Boolean,System.Boolean)">
+            <summary>
+            Read data from a sensor via the SPI bus.  Unlike <see cref="!:ISPIDataProducer.Read(byte, byte, byte, byte, byte, SpiFrequency, bool, bool, byte[])"/>, 
+            this function provides a direct way to access SPI data as opposed to creating a data route.
+            </summary>
+            <param name="length">Number of bytes to read</param>
+            <param name="slaveSelectPin">Pin for slave select</param>
+            <param name="clockPin">Pin for serial clock</param>
+            <param name="mosiPin">Pin for master output, slave input</param>
+            <param name="misoPin">Pin for master input, slave output</param>
+            <param name="mode">SPI operating mode, see <a href="https://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus#Mode_numbers">SPI Wiki Page</a></param>
+            <param name="frequency">SPI operating frequency</param>
+            <param name="data">Data to write to the device before the read, defaults to null</param>
+            <param name="lsbFirst">True to have LSB sent first, defaults to true</param>
+            <param name="useNativePins">True to use the nRF pin mappings rather than the GPIO pin mappings, defaults to true</param>
+            <returns>Data received from the read command</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Peripheral.ISwitch">
+            <summary>
+            On-board push button switch
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Peripheral.ISwitch.State">
+            <summary>
+            Data producer representing the button state
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IAccelerometer">
+            <summary>
+            Measures sources of acceleration, such as gravity or motion.  This interface only provides general
+            access to an accelerometer.  If you know specifically which accelerometer is on your board, use the
+            appropriate subclass instead.
+            <seealso cref="T:MbientLab.MetaWear.Sensor.IAccelerometerBma255"/>
+            <seealso cref="T:MbientLab.MetaWear.Sensor.IAccelerometerBmi160"/>
+            <seealso cref="T:MbientLab.MetaWear.Sensor.IAccelerometerMma8452q"/>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometer.Odr">
+            <summary>
+            Currently set output data rate
+            <para>This value is only valid if either <see cref="M:MbientLab.MetaWear.Sensor.IAccelerometer.Configure(System.Single,System.Single)"/> or <see cref="M:MbientLab.MetaWear.Sensor.IAccelerometer.PullConfigAsync"/> 
+            has been called</para>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometer.Range">
+            <summary>
+            Currently set data range
+            <para>This value is only valid if either <see cref="M:MbientLab.MetaWear.Sensor.IAccelerometer.Configure(System.Single,System.Single)"/> or <see cref="M:MbientLab.MetaWear.Sensor.IAccelerometer.PullConfigAsync"/></para>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometer.Acceleration">
+            <summary>
+            Data producer representing the sensor's acceleration data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometer.PackedAcceleration">
+            <summary>
+            Variant data producer that packs 3 acceleration samples in to 1 ble packet.  
+            Only streaming is supported by this data producer
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IAccelerometer.Configure(System.Single,System.Single)">
+            <summary>
+            General function to configure the accelerometer.  The closest valid values will be selected
+            based on the underlying accelerometer which may not equal the input values.
+            </summary>
+            <param name="odr">Output data rate, defaults to 100Hz</param>
+            <param name="range">Acceleration data range, defaults to 2g</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IAccelerometer.Start">
+            <summary>
+            Switch the accelerometer into active mode
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IAccelerometer.Stop">
+            <summary>
+            Switch the accelerometer into standby mode
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IAccelerometer.PullConfigAsync">
+            <summary>
+            Pulls the current accelerometer output data rate and data range from the sensor
+            </summary>
+            <returns>Task that is completed when the settings are received</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBma255.OutputDataRate">
+            <summary>
+            Operating frequencies of the BMA255accelerometer
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBma255.FlatHoldTime">
+            <summary>
+            Enumeration of hold times for the BMI160's flat detection algorithm
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBma255.IBma255FlatDataProducer">
+            <summary>
+            Extension of the <see cref="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.ITapDataProducer"/> interface providing
+            configuration options specific to the BMI160 IMU
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBma255.IBma255FlatDataProducer.Configure(System.Nullable{MbientLab.MetaWear.Sensor.AccelerometerBma255.FlatHoldTime},System.Nullable{System.Single})">
+            <summary>
+            Configure the flat detection algorithm.
+            </summary>
+            <param name="hold">Delay for which the flat value must remain stable for an interrupt</param>
+            <param name="theta">Threshold angle defining a flat position, between [0, 44.8] degrees</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IAccelerometerBma255">
+            <summary>
+            Extension of the <see cref="T:MbientLab.MetaWear.Sensor.IAccelerometer"/> interface providing finer control of the BMA255 accelerometer
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometerBma255.Flat">
+            <summary>
+            Async data producer for the BMA255's flat detection algorithm
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IAccelerometerBma255.Configure(MbientLab.MetaWear.Sensor.AccelerometerBma255.OutputDataRate,MbientLab.MetaWear.Sensor.AccelerometerBosch.DataRange)">
+            <summary>
+            Configure the snsor with settings specific to the BMA255 accelerometer
+            </summary>
+            <param name="odr">Output data rate</param>
+            <param name="range">Data range</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.FilterMode">
+            <summary>
+            Accelerometer digital filter modes on the BMI160
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.OutputDataRate">
+            <summary>
+            Operating frequencies of the BMI160 accelerometer
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.StepDetectorMode">
+            <summary>
+            Operation modes for the step detector algorithm
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AccelerometerBmi160.StepDetectorMode.Normal">
+            <summary>
+            Default mode with a balance between false positives and false negatives
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AccelerometerBmi160.StepDetectorMode.Sensitive">
+            <summary>
+            For light weighted persons that gives few false negatives but eventually more false positives
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AccelerometerBmi160.StepDetectorMode.Robust">
+            <summary>
+            Gives few false positives but eventually more false negatives
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.IStepCounterDataProducer">
+            <summary>
+            Accumulates the number of detected steps in a counter that will send its current value on request, cannot be used 
+            in conjunction with the <see cref="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.IStepDetectorDataProducer"/> interface.
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBmi160.IStepCounterDataProducer.Configure(MbientLab.MetaWear.Sensor.AccelerometerBmi160.StepDetectorMode)">
+            <summary>
+            Configure the step counter algorithm.  Must be called to have the step algorithm function as a counter.
+            </summary>
+            <param name="mode">Sensitivity mode, defaults to <see cref="F:MbientLab.MetaWear.Sensor.AccelerometerBmi160.StepDetectorMode.Normal"/></param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBmi160.IStepCounterDataProducer.Reset">
+            <summary>
+            Resets the internal step counter
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.IStepDetectorDataProducer">
+            <summary>
+            Interrupt driven step detection where each detected step triggers a data interrupt, cannot be used in 
+            conjunction with the <see cref="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.IStepCounterDataProducer"/> interface.
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBmi160.IStepDetectorDataProducer.Configure(MbientLab.MetaWear.Sensor.AccelerometerBmi160.StepDetectorMode)">
+            <summary>
+            Configure the step counter algorithm.  Must be called to have the step algorithm function as a detector.
+            </summary>
+            <param name="mode">Sensitivity mode, defaults to <see cref="F:MbientLab.MetaWear.Sensor.AccelerometerBmi160.StepDetectorMode.Normal"/></param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.FlatHoldTime">
+            <summary>
+            Enumeration of hold times for the BMI160's flat detection algorithm
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.IBmi160FlatDataProducer">
+            <summary>
+            Extension of the <see cref="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.ITapDataProducer"/> interface providing
+            configuration options specific to the BMI160 IMU
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBmi160.IBmi160FlatDataProducer.Configure(System.Nullable{MbientLab.MetaWear.Sensor.AccelerometerBmi160.FlatHoldTime},System.Nullable{System.Single})">
+            <summary>
+            Configure the flat detection algorithm.
+            </summary>
+            <param name="hold">Delay for which the flat value must remain stable for an interrupt</param>
+            <param name="theta">Threshold angle defining a flat position, between [0, 44.8] degrees</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.SkipTime">
+            <summary>
+            Skip times available for significant motion detection
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AccelerometerBmi160.SkipTime._1_5s">
+            <summary>
+            1.5 seconds
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.ProofTime">
+            <summary>
+            Proof times available for significant motion detection
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AccelerometerBmi160.ProofTime._0_25s">
+            <summary>
+            0.25 seconds
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AccelerometerBmi160.ProofTime._0_5s">
+            <summary>
+            0.5 seconds
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBmi160.IBmi160MotionDataProducer">
+            <summary>
+            Extension of the <see cref="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.IMotionDataProducer"/> interface providing configuration 
+            options for significant motion detection on the BMI160 IMU
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBmi160.IBmi160MotionDataProducer.ConfigureSignificant(System.Nullable{MbientLab.MetaWear.Sensor.AccelerometerBmi160.SkipTime},System.Nullable{MbientLab.MetaWear.Sensor.AccelerometerBmi160.ProofTime})">
+            <summary>
+            Configure the accelerometer for significant-motion detection
+            </summary>
+            <param name="skip">Number of seconds to sleep after movement is detected</param>
+            <param name="proof">Number of seconds that movement must still be detected after the skip time passed</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IAccelerometerBmi160">
+            <summary>
+            Extension of the <see cref="T:MbientLab.MetaWear.Sensor.IAccelerometerBosch"/> interface providing finer control of the BMI160 accelerometer features
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometerBmi160.StepCounter">
+            <summary>
+            Data producer representing the step counter output
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometerBmi160.StepDetector">
+            <summary>
+            Data producer representing the step detector output
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometerBmi160.Flat">
+            <summary>
+            Async data producer for the BMI160's flat detection algorithm
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometerBmi160.Motion">
+            <summary>
+            Async data producer for the BMI160's motion detection algorithm
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IAccelerometerBmi160.Configure(MbientLab.MetaWear.Sensor.AccelerometerBmi160.OutputDataRate,MbientLab.MetaWear.Sensor.AccelerometerBosch.DataRange,MbientLab.MetaWear.Sensor.AccelerometerBmi160.FilterMode)">
+            <summary>
+            Configure the snsor with settings specific to the BMA255 accelerometer
+            </summary>
+            <param name="odr">Output data rate, defaults to 100Hz</param>
+            <param name="range">Data range, defaults to +/-2g</param>
+            <param name="filter">Accelerometer digital filter mode, defaults to <see cref="F:MbientLab.MetaWear.Sensor.AccelerometerBmi160.FilterMode.Normal"/></param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.DataRange">
+            <summary>
+            Available data ranges for Bosch accelerometers
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.OrientationMode">
+            <summary>
+            Calculation modes controlling the conditions that determine the sensor's orientation
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AccelerometerBosch.OrientationMode.Symmetrical">
+            <summary>
+            Default mode
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.IOrientationDataProducer">
+            <summary>
+            On-board algorithm that detects changes in the sensor's orientation.
+            <para>Data is represented as a <see cref="T:MbientLab.MetaWear.Data.SensorOrientation"/> enum.</para>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBosch.IOrientationDataProducer.Configure(System.Nullable{MbientLab.MetaWear.Sensor.AccelerometerBosch.OrientationMode},System.Nullable{System.Single})">
+            <summary>
+            Configure the orientation detection algorithm
+            </summary>
+            <param name="mode">New calculation mode</param>
+            <param name="hysteresis">New hysteresis value for landscape/portrait detection.  
+            This value is in g's and defaults to 0.0625g</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.IFlatDataProducer">
+            <summary>
+            On-board algorithm that detects whether or not the senor is laying flat.  
+            <para>Data is represented as a boolean.</para>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBosch.IFlatDataProducer.Configure(System.Nullable{System.UInt16},System.Nullable{System.Single})">
+            <summary>
+            Configure the flat detection algorithm.
+            </summary>
+            <param name="hold">Delay for which the flat value must remain stable for an interrupt, in milliseconds.  
+            The closest valid value will be chosen.</param>
+            <param name="theta">Threshold angle defining a flat position, between [0, 44.8] degrees</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.LowHighG">
+            <summary>
+            Wrapper class encapsulating the response from low/high-g detecton
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.AccelerometerBosch.LowHighG.IsLow">
+            <summary>
+            True if the interrupt from from low-g motion
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.AccelerometerBosch.LowHighG.IsHigh">
+            <summary>
+            True if the interrupt from from high-g motion.  If it is not high-g motion, there is no
+            need to check the high-g variables
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.AccelerometerBosch.LowHighG.HighGx">
+            <summary>
+            True if the x-axis triggered high-g interrupt
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.AccelerometerBosch.LowHighG.HighGy">
+            <summary>
+            True if the y-axis triggered high-g interrupt
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.AccelerometerBosch.LowHighG.HighGz">
+            <summary>
+            True if the z-axis triggered high-g interrupt
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.AccelerometerBosch.LowHighG.HighSign">
+            <summary>
+            Direction of the high-g motion interrupt
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.LowGMode">
+            <summary>
+            Interrupt modes for low-g detection
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AccelerometerBosch.LowGMode.Single">
+            <summary>
+             Compare |acc_x|, |acc_y|, |acc_z| with the low threshold
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AccelerometerBosch.LowGMode.Sum">
+            <summary>
+            Compare |acc_x| + |acc_y| + |acc_z| with the low threshold
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.ILowAndHighGDataProducer">
+            <summary>
+            On-board algorithm that detects when low (i.e. free fall) or high g acceleration is measured.  Data is 
+            represented as a <see cref="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.LowHighG"/> object
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBosch.ILowAndHighGDataProducer.Configure(System.Boolean,System.Nullable{System.UInt16},System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{MbientLab.MetaWear.Sensor.AccelerometerBosch.LowGMode},System.Boolean,System.Boolean,System.Boolean,System.Nullable{System.UInt16},System.Nullable{System.Single},System.Nullable{System.Single})">
+            <summary>
+            Configure the low/high-g detection algorithm.  
+            <para>Both detection types are configured at once with this function.  All parameters are optional so 
+            developers only need to set the ones they are need</para>
+            </summary>
+            <param name="enableLowG">Set to 'true' to enable low-g detection, defaults to 'false'</param>
+            <param name="lowDuration">Minimum amount of time the acceleration must stay below (ths + hys) for an interrupt, between [2.5, 640]ms</param>
+            <param name="lowThreshold">Threshold that triggers a low-g interrupt, between [0.00391, 2.0]g</param>
+            <param name="lowHysteresis">Hysteresis level for low-g interrupt, between [0, 0.375]g</param>
+            <param name="mode">Low G detection type</param>
+            <param name="enableHighGx">Set to 'true' to enable high-g detection on the x-axis, default to 'false'</param>
+            <param name="enableHighGy">Set to 'true' to enable high-g detection on the y-axis, default to 'false'</param>
+            <param name="enableHighGz">Set to 'true' to enable high-g detection on the z-axis, default to 'false'</param>
+            <param name="highDuration">Minimum amount of time the acceleration sign does not change for an interrupt</param>
+            <param name="highThreshold">Threshold for clearing high-g interrupt</param>
+            <param name="highHysteresis">Hysteresis level for clearing the high-g interrupt</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.AnyMotion">
+            <summary>
+            Wrapper class encapsulating responses from any motion detection
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.AccelerometerBosch.AnyMotion.Sign">
+            <summary>
+            Slope sign of the triggering motion
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.AccelerometerBosch.AnyMotion.XAxisActive">
+            <summary>
+            True if x-axis triggered the motion interrupt
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.AccelerometerBosch.AnyMotion.YAxisActive">
+            <summary>
+            True if y-axis triggered the motion interrupt
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.AccelerometerBosch.AnyMotion.ZAxisActive">
+            <summary>
+            True if z-axis triggered the motion interrupt
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.IMotionDataProducer">
+            <summary>
+            On-board algorithms for detecting various types of motion.  
+            <para>The various 'Configure' methods in this interface both enable and configure their respective motion detection types.  
+            Only of these types can be detected at a time.</para>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBosch.IMotionDataProducer.ConfigureNo(System.Nullable{System.Int32},System.Nullable{System.Single})">
+            <summary>
+            Configure the accelerometer for no-motion detection
+            </summary>
+            <param name="duration">Time, in milliseconds, for which no slope data points exceed the threshold</param>
+            <param name="threshold">Threshold, in g's, for which no slope data points must exceed</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBosch.IMotionDataProducer.ConfigureAny(System.Nullable{System.Int32},System.Nullable{System.Single})">
+            <summary>
+            Configure the accelerometer for any-motion detection
+            </summary>
+            <param name="count">Number of consecutive slope data points that must be above the threshold</param>
+            <param name="threshold">Value that the slope data points must be above</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBosch.IMotionDataProducer.ConfigureSlow(System.Nullable{System.Byte},System.Nullable{System.Single})">
+            <summary>
+            Configure the accelerometer for slow-motion detection
+            </summary>
+            <param name="count">Number of consecutive slope data points that must be above the threshold</param>
+            <param name="threshold">Threshold, in g's, for which no slope data points must exceed</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.Tap">
+            <summary>
+            Wrapper class encapsulating responses from tap detection
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.TapQuietTime">
+            <summary>
+            Available quiet times for double tap detection
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.TapShockTime">
+            <summary>
+            Available shock times for tap detection
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.DoubleTapWindow">
+            <summary>
+            Available windows for double tap detection
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.ITapDataProducer">
+            <summary>
+            Ob-board algorithm that detects taps.  Data is repesented as a <see cref="T:MbientLab.MetaWear.Sensor.AccelerometerBosch.Tap"/> object.
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerBosch.ITapDataProducer.Configure(System.Boolean,System.Boolean,System.Nullable{System.Single},System.Nullable{MbientLab.MetaWear.Sensor.AccelerometerBosch.TapQuietTime},System.Nullable{MbientLab.MetaWear.Sensor.AccelerometerBosch.TapShockTime},System.Nullable{MbientLab.MetaWear.Sensor.AccelerometerBosch.DoubleTapWindow})">
+            <summary>
+            Configure the tap detection
+            </summary>
+            <param name="enableSingle">Set to 'true' to enable single tap, defaults to 'false'</param>
+            <param name="enableDouble">Set to 'true' to enable double tap, defaults to 'false'</param>
+            <param name="threshold">Threshold that the acceleration difference must exceed for a tap, in g's</param>
+            <param name="quiet">Time that must pass before a second tap can occur</param>
+            <param name="shock">Time to lock the data in the status register</param>
+            <param name="window">Length of time for a second shock to occur for a double tap</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IAccelerometerBosch">
+            <summary>
+            Extension of the <see cref="T:MbientLab.MetaWear.Sensor.IAccelerometer"/> providing general access to a Bosch accelerometer.  If you know specifically which
+            Bosch accelerometer is on your board, use the appropriate subclass instead.
+            <seealso cref="T:MbientLab.MetaWear.Sensor.IAccelerometerBma255"/>
+            <seealso cref="T:MbientLab.MetaWear.Sensor.IAccelerometerBmi160"/>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometerBosch.Orientation">
+            <summary>
+            Async data producer for the orientation detection algorithm
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometerBosch.Flat">
+            <summary>
+            Async data producer for the flat detection algorithm
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometerBosch.LowAndHighG">
+            <summary>
+            Async data producer for the low/high-g detection algorithm
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometerBosch.Motion">
+            <summary>
+            Async data producer for the motion detection algorithm
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometerBosch.Tap">
+            <summary>
+            Async data producer for the tap detection algorithm
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerMma8452q.DataRange">
+            <summary>
+            Available data ranges for the MMA8452Q
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerMma8452q.OutputDataRate">
+            <summary>
+            Available operating frequencies for the MMA8452Q
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerMma8452q.Oversampling">
+            <summary>
+            Available oversampling modes on the MMA8452Q sensor
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AccelerometerMma8452q.IOrientationDataProducer">
+            <summary>
+            On-board algorithm that detects changes in the sensor's orientation.
+            <para>Data is represented as a <see cref="T:MbientLab.MetaWear.Data.SensorOrientation"/> enum.</para>
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.AccelerometerMma8452q.IOrientationDataProducer.Configure(System.Int32)">
+            <summary>
+            Configure the orientation detection algorithm
+            </summary>
+            <param name="delay">Time, in milliseconds, for which the sensor's orientation must remain in the new position 
+            before a position change is triggered</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IAccelerometerMma8452q">
+            <summary>
+            Extension of the <see cref="T:MbientLab.MetaWear.Sensor.IAccelerometer"/> interface providing finer control of the MMA8452Q accelerometer
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAccelerometerMma8452q.Orientation">
+            <summary>
+            Async data producer for the orientation detection algorithm
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IAccelerometerMma8452q.Configure(MbientLab.MetaWear.Sensor.AccelerometerMma8452q.OutputDataRate,MbientLab.MetaWear.Sensor.AccelerometerMma8452q.DataRange,System.Nullable{System.Single},MbientLab.MetaWear.Sensor.AccelerometerMma8452q.Oversampling)">
+            <summary>
+            Configure the snsor with settings specific to the MMA8452Q accelerometer
+            </summary>
+            <param name="odr">Output data rate, defaults to 100Hz</param>
+            <param name="range">Data range, defaults to +/-2g</param>
+            <param name="highPassCutoff">Enables high pass filter with a cutoff frequency between [0.031, 16.0]Hz, defaults to disabled</param>
+            <param name="oversample">New oversampling mode, defaults to <see cref="F:MbientLab.MetaWear.Sensor.AccelerometerMma8452q.Oversampling.Normal"/></param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AmbientLightLtr329.Gain">
+            <summary>
+            Available gain multipliers
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AmbientLightLtr329.Gain._1x">
+            <summary>
+            Illuminance range between [1, 64k] lux (default)
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AmbientLightLtr329.Gain._2x">
+            <summary>
+            Illuminance range between [0.5, 32k] lux
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AmbientLightLtr329.Gain._4x">
+            <summary>
+            Illuminance range between [0.25, 16k]
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AmbientLightLtr329.Gain._8x">
+            <summary>
+            Illuminance range between [0.125, 8k]
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AmbientLightLtr329.Gain._48x">
+            <summary>
+            Illuminance range between [0.02, 1.3k]
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AmbientLightLtr329.Gain._96x">
+            <summary>
+            Illuminance range between [0.01, 600]
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AmbientLightLtr329.IntegrationTime">
+            <summary>
+            Available integration times
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AmbientLightLtr329.IntegrationTime._100ms">
+            <summary>
+            Default setting
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.AmbientLightLtr329.MeasurementRate">
+            <summary>
+            Available measurement rates
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.AmbientLightLtr329.MeasurementRate._500ms">
+            <summary>
+            Default setting
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IAmbientLightLtr329">
+            <summary>
+            Lite-On sensor converting light intensity to a digital signal
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IAmbientLightLtr329.Illuminance">
+            <summary>
+            Data producer for illuminance data
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IAmbientLightLtr329.Configure(MbientLab.MetaWear.Sensor.AmbientLightLtr329.Gain,MbientLab.MetaWear.Sensor.AmbientLightLtr329.IntegrationTime,MbientLab.MetaWear.Sensor.AmbientLightLtr329.MeasurementRate)">
+            <summary>
+            Configures the ambient light sensor
+            </summary>
+            <param name="gain">Controls the range and resolution of illuminance values, defaults to 1x</param>
+            <param name="time">Measurement time for each cycle, defaults to 100mx</param>
+            <param name="rate">How frequently to update the illuminance data, defaults to 500ms</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.BarometerBme280.StandbyTime">
+            <summary>
+            Supported stand by times on the BME280 barometer
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IBarometerBme280">
+            <summary>
+            Extension of the <see cref="T:MbientLab.MetaWear.Sensor.IBarometerBosch"/> interface providing finer control over the barometer
+            on the BME280 environmental sensor.
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IBarometerBme280.Configure(MbientLab.MetaWear.Sensor.BarometerBosch.Oversampling,MbientLab.MetaWear.Sensor.BarometerBosch.IirFilerCoeff,MbientLab.MetaWear.Sensor.BarometerBme280.StandbyTime)">
+            <summary>
+            Configure the snsor with settings specific to the BME280 barometer
+            </summary>
+            <param name="os">Oversampling mode, defaults to standard</param>
+            <param name="coeff">IIR coefficient, defaults to 0 (off)</param>
+            <param name="standbyTime">Standby time in milliseconds (ms), defaults to 0.5ms</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.BarometerBmp280.StandbyTime">
+            <summary>
+            Supported stand by times on the BME280 barometer
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IBarometerBmp280">
+            <summary>
+            Extension of the <seealso cref="T:MbientLab.MetaWear.Sensor.IBarometerBosch"/> interface providing finer control over the barometer on
+            the BMP280 pressure sensor
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IBarometerBmp280.Configure(MbientLab.MetaWear.Sensor.BarometerBosch.Oversampling,MbientLab.MetaWear.Sensor.BarometerBosch.IirFilerCoeff,MbientLab.MetaWear.Sensor.BarometerBmp280.StandbyTime)">
+            <summary>
+            Configure the snsor with settings specific to the BMP280 barometer
+            </summary>
+            <param name="os">Oversampling mode, defaults to standard</param>
+            <param name="coeff">IIR coefficient, defaults to 0 (off)</param>
+            <param name="standbyTime">Standby time in milliseconds (ms), defaults to 0.5ms</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.BarometerBosch.Oversampling">
+            <summary>
+            Supported oversampling modes on a Bosch barometer
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.BarometerBosch.IirFilerCoeff">
+            <summary>
+            Available IIR (infinite impulse response) filter coefficients
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IBarometerBosch">
+            <summary>
+            Absolute barometric pressure sensor by Bosch.  This interface provides general access to a Bosch
+            barometer.If you know specifically which barometer is on your board, use the appropriate subclass
+            instead.
+            <seealso cref="T:MbientLab.MetaWear.Sensor.IBarometerBme280"/>
+            <seealso cref="T:MbientLab.MetaWear.Sensor.IBarometerBmp280"/>
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IBarometerBosch.Pressure">
+            <summary>
+            Data producer representing pressure data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IBarometerBosch.Altitude">
+            <summary>
+            Data producer representing altitude data
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IBarometerBosch.Configure(MbientLab.MetaWear.Sensor.BarometerBosch.Oversampling,MbientLab.MetaWear.Sensor.BarometerBosch.IirFilerCoeff,System.Single)">
+            <summary>
+            General function to configure the barometer.  The closest valid standby time will be selected 
+            based on the underlying barometer which may not match the input value
+            </summary>
+            <param name="os">Oversampling mode, defaults to standard</param>
+            <param name="coeff">IIR coefficient, defaults to 0 (off)</param>
+            <param name="standbyTime">Standby time in milliseconds (ms), defaults to 0.5ms</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IBarometerBosch.Start">
+            <summary>
+            Start data sampling
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IBarometerBosch.Stop">
+            <summary>
+            Stop data sampling
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.ColorTcs34725.Gain">
+            <summary>
+            Analog gain multipliers
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.ColorTcs34725.Adc">
+            <summary>
+            Wrapper class encapsulating adc data from the sensor
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IColorTcs34725">
+            <summary>
+            Colored light-to-digital converter by TAOS that can sense red, green, blue, and clear light
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IColorTcs34725.Adc">
+            <summary>
+            Data producer representing the measured adc values
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IColorTcs34725.Configure(MbientLab.MetaWear.Sensor.ColorTcs34725.Gain,System.Single,System.Boolean)">
+            <summary>
+            Configure the color sensor
+            </summary>
+            <param name="gain">Analog gain, defaults to 1x</param>
+            <param name="integationTime">Integration time, impacts resolution and sensitivity, defaults to 2.4ms</param>
+            <param name="illuminate">True if illuminator led should be flashed before measuring the data, defaults to false</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.GyroBmi160.FilterMode">
+            <summary>
+            Gyro digital filter modes on the BMI160
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.GyroBmi160.OutputDataRate">
+            <summary>
+            Operating frequencies of the gyro
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.GyroBmi160.DataRange">
+            <summary>
+            Available angular velocity measurement ranges
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IGyroBmi160">
+            <summary>
+            Sensor on the BMI160 IMU measuring angular velocity
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IGyroBmi160.AngularVelocity">
+            <summary>
+            Data producer representing the sensor's angular velocity data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IGyroBmi160.PackedAngularVelocity">
+            <summary>
+            Variant data producer that packs 3 angular velocity samples in to 1 ble packet.  
+            Only streaming is supported by this data producer
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IGyroBmi160.Configure(MbientLab.MetaWear.Sensor.GyroBmi160.OutputDataRate,MbientLab.MetaWear.Sensor.GyroBmi160.DataRange,MbientLab.MetaWear.Sensor.GyroBmi160.FilterMode)">
+            <summary>
+            Configure the snsor with settings specific to the BMI160 gyro
+            </summary>
+            <param name="odr">Output data rate</param>
+            <param name="range">Data range</param>
+            <param name="filter">Accelerometer digital filter mode</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IGyroBmi160.Start">
+            <summary>
+            Switch the gyro into active mode
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IGyroBmi160.Stop">
+            <summary>
+            Switch the gyro into standby mode
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IGyroBmi160.PullConfigAsync">
+            <summary>
+            Pulls the current gyro output data rate and data range from the sensor
+            </summary>
+            <returns>Task that is completed when the settings are received</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IHumidityBme280">
+            <summary>
+            Sensor on the BME280 environmental sensor measuring relative humidity
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IHumidityBme280.Percentage">
+            <summary>
+            Data producer representing relative humidity
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IHumidityBme280.Configure(MbientLab.MetaWear.Sensor.BarometerBosch.Oversampling)">
+            <summary>
+            Configure the snsor with settings specific to the BME280 humidity sensor
+            </summary>
+            <param name="os">Oversampling mode, defaults to standard</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.MagnetometerBmm150.Preset">
+            <summary>
+            Recommended configurations for the magnetometer
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.MagnetometerBmm150.Preset.LowPower">
+            <summary>
+            10Hz, 170uA
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.MagnetometerBmm150.Preset.Regular">
+            <summary>
+            10Hz, 0.5mA
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.MagnetometerBmm150.Preset.EnhancedRegular">
+            <summary>
+            10Hz, 0.8mA
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.MagnetometerBmm150.Preset.HighAccuracy">
+            <summary>
+            20Hz, 4.9mA
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.MagnetometerBmm150.OutputDataRate">
+            <summary>
+            Supported output data rates for the BMM150 sensor
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IMagnetometerBmm150">
+            <summary>
+            Bosch sensor measuring magnetic field strength
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IMagnetometerBmm150.MagneticField">
+            <summary>
+            Data producer representing the magnetic field strength
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IMagnetometerBmm150.PackedMagneticField">
+            <summary>
+            Variant data producer that packs 3 B field samples in to 1 ble packet.  
+            Only streaming is supported by this data producer
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IMagnetometerBmm150.Configure(System.UInt16,System.UInt16,MbientLab.MetaWear.Sensor.MagnetometerBmm150.OutputDataRate)">
+            <summary>
+            Configure the magnetometer
+            </summary>
+            <param name="xyReps">Number of repetitions on the XY axis, between [1, 511], defauts to 9 reps</param>
+            <param name="zReps">Number of repetitions on the Z axis, between [1, 256], defaut to 15 reps</param>
+            <param name="odr">Output data rate, defaults to 10Hz</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IMagnetometerBmm150.Configure(MbientLab.MetaWear.Sensor.MagnetometerBmm150.Preset)">
+            <summary>
+            Apply a preset configuration
+            </summary>
+            <param name="preset">Preset configuration to use</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IMagnetometerBmm150.Start">
+            <summary>
+            Switch the magnetometer into normal mode
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IMagnetometerBmm150.Stop">
+            <summary>
+            Switch the magnetometer into sleep mode
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IMagnetometerBmm150.Suspend">
+            <summary>
+            Switch the magnetometer into suspend mode.  When placed in suspend mode, sensor settings are reset 
+            and will need to be reconfigured.
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.ProximityTsl2671.ReceiverDiode">
+            <summary>
+            Photodiodes the sensor should use for proximity detection
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.ProximityTsl2671.ReceiverDiode.Channel0">
+            <summary>
+            Responsive to both visible and infrared light
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.ProximityTsl2671.ReceiverDiode.Channel1">
+            <summary>
+            Responsive primarily to infrared light
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.ProximityTsl2671.ReceiverDiode.Both">
+            <summary>
+            Use both photodiodes
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.ProximityTsl2671.TransmitterDriveCurrent">
+            <summary>
+            Amount of current to drive the sensor
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.IProximityTsl2671">
+            <summary>
+            Digital proximity detector for short-distance detection by AMS
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.IProximityTsl2671.Adc">
+            <summary>
+            Data producer representing measured adc values
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.IProximityTsl2671.Configure(MbientLab.MetaWear.Sensor.ProximityTsl2671.ReceiverDiode,MbientLab.MetaWear.Sensor.ProximityTsl2671.TransmitterDriveCurrent,System.Single,System.Byte)">
+            <summary>
+            Configure the proximity detector
+            </summary>
+            <param name="diode">Photodiode responding to light, defaults to <see cref="F:MbientLab.MetaWear.Sensor.ProximityTsl2671.ReceiverDiode.Channel1"/></param>
+            <param name="current">Led drive current, defaults to <see cref="F:MbientLab.MetaWear.Sensor.ProximityTsl2671.TransmitterDriveCurrent._25mA"/>.  
+            For boards powered by the CR2032 battery, it is recommended to use 25mA or less</param>
+            <param name="integrationTime">Period of time the internal ADC converts the analog signal into digital counts, defaults to 2.72ms</param>
+            <param name="nPulses">Number of pulses, defaults to 1.  Sensitivity grows by the square root of the number of pulses</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.Temperature.SensorType">
+            <summary>
+            Available types of temperature sensors.  Different boards will have a different combination
+            of sensor types
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.Temperature.SensorType.NrfSoc">
+            <summary>
+            Data from nRF SOC
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.Temperature.SensorType.ExtThermistor">
+            <summary>
+            External thermistor connected to the GPIO pins
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.Temperature.SensorType.BoschEnv">
+            <summary>
+            Data from a Bosch environmental sensor (BMP280 or BME280)
+            </summary>
+        </member>
+        <member name="F:MbientLab.MetaWear.Sensor.Temperature.SensorType.PresetThermistor">
+            <summary>
+            Preset thermistor on the module
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.Temperature.ISensor">
+            <summary>
+            Data producer representing temperature data
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.Temperature.ISensor.Type">
+            <summary>
+            Type of temperature sensor this objec represents
+            </summary>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.Temperature.IExternalThermistor">
+            <summary>
+            Data producer representing an external thermistor
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.Temperature.IExternalThermistor.Configure(System.Byte,System.Byte,System.Boolean)">
+            <summary>
+            Configures the settings for the thermistor
+            </summary>
+            <param name="dataPin">GPIO pin that reads the data</param>
+            <param name="pulldownPin">GPIO pin the pulldown resistor is connected to</param>
+            <param name="activeHigh">True if the pulldown pin is active high</param>
+        </member>
+        <member name="T:MbientLab.MetaWear.Sensor.ITemperature">
+            <summary>
+            Accesses the temperature sensors
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.Sensor.ITemperature.Sensors">
+            <summary>
+            List of available temperature sensors on the board
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Sensor.ITemperature.FindSensors(MbientLab.MetaWear.Sensor.Temperature.SensorType)">
+            <summary>
+            Find all temperature sensors whose <see cref="P:MbientLab.MetaWear.Sensor.Temperature.ISensor.Type"/> property matches the <code>type</code> parameter
+            </summary>
+            <param name="type">Sensor type to look for</param>
+            <returns>List of sensors matching the sensor type</returns>
+        </member>
+        <member name="T:MbientLab.MetaWear.TaskTimeoutException">
+            <summary>
+            Extension of the <see cref="T:System.TimeoutException"/> class that contains a partial result of the task
+            </summary>
+        </member>
+        <member name="P:MbientLab.MetaWear.TaskTimeoutException.PartialResult">
+            <summary>
+            Partial result of the task
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.TaskTimeoutException.#ctor(System.Exception,System.Object)">
+            <summary>
+            Creates an exception with the given cause and partial result
+            </summary>
+            <param name="innerException">Exception that caused this one</param>
+            <param name="partial">Partial result of the task</param>
+        </member>
+    </members>
+</doc>
