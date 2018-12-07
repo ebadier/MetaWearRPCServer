@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MbientLab.MetaWear.DotNet</name>
+    </assembly>
+    <members>
+        <member name="T:MbientLab.MetaWear.Win10.Application">
+            <summary>
+            Entry point into the MetaWear API for UWP or .NET console apps
+            </summary>
+        </member>
+        <member name="M:MbientLab.MetaWear.Win10.Application.SetCacheFolder(System.String)">
+            <summary>
+            Set the path the API uses to cache data
+            </summary>
+            <param name="path">New path to use</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Win10.Application.GetMetaWearBoard(Windows.Devices.Bluetooth.BluetoothLEDevice)">
+            <summary>
+            Instantiates an <see cref="T:MbientLab.MetaWear.IMetaWearBoard"/> object corresponding to the BluetoothLE device
+            </summary>
+            <param name="device">BluetoothLE device object corresponding to the target MetaWear board</param>
+            <returns><see cref="T:MbientLab.MetaWear.IMetaWearBoard"/> object</returns>
+        </member>
+        <member name="M:MbientLab.MetaWear.Win10.Application.RemoveMetaWearBoard(Windows.Devices.Bluetooth.BluetoothLEDevice,System.Boolean)">
+            <summary>
+            Removes the <see cref="T:MbientLab.MetaWear.IMetaWearBoard"/> object corresponding to the BluetoothLE device
+            </summary>
+            <param name="device">BluetoothLE device object corresponding to the target MetaWear board</param>
+            <param name="dispose">True if existing references to the BluetoothLEDevice object should be disposed of</param>
+        </member>
+        <member name="M:MbientLab.MetaWear.Win10.Application.ClearDeviceCacheAsync(Windows.Devices.Bluetooth.BluetoothLEDevice)">
+            <summary>
+            Clears cached information specific to the BluetoothLE device
+            </summary>
+            <param name="device">BluetoothLE device to clear</param>
+            <returns>Null task</returns>
+        </member>
+    </members>
+</doc>

@@ -55,32 +55,32 @@ namespace MetaWearRPC
 		}
 
 		#region IMetaWearContract
-		public void InitBoard(string pMacAdress)
+		public void InitBoard(ulong pMacAdress)
 		{
 			_client.Contract.InitBoard(pMacAdress);
 		}
 
-		public void CloseBoard(string pMacAdress)
+		public void CloseBoard(ulong pMacAdress)
 		{
 			_client.Contract.CloseBoard(pMacAdress);
 		}
 
-		public string GetBoardModel(string pMacAdress)
+		public string GetBoardModel(ulong pMacAdress)
 		{
 			return _client.Contract.GetBoardModel(pMacAdress);
 		}
 
-		public byte GetBatteryLevel(string pMacAdress)
+		public byte GetBatteryLevel(ulong pMacAdress)
 		{
 			return _client.Contract.GetBatteryLevel(pMacAdress);
 		}
 
-		public void StartMotor(string pMacAdress, ushort pDurationMs, float pIntensity)
+		public void StartMotor(ulong pMacAdress, ushort pDurationMs, float pIntensity)
 		{
 			_client.Contract.StartMotor(pMacAdress, pDurationMs, pIntensity);
 		}
 
-		public void StartBuzzer(string pMacAdress, ushort pDurationMs)
+		public void StartBuzzer(ulong pMacAdress, ushort pDurationMs)
 		{
 			_client.Contract.StartBuzzer(pMacAdress, pDurationMs);
 		}
