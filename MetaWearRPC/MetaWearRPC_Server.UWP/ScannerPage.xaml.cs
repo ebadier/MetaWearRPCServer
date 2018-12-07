@@ -12,11 +12,10 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using MetaWearRPC;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace MbientLab.BtleDeviceScanner
+namespace MetaWearRPC_ServerUWP
 {
 	public sealed class MacAddressHexString : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, string language) {
@@ -53,9 +52,8 @@ namespace MbientLab.BtleDeviceScanner
         internal Type NextPageType { get; }
         internal List<Guid> ServiceUuids { get; }
 
-        public ScanConfig(Type nextPageType, int duration = 10000, List<Guid> serviceUuids = null) {
+        public ScanConfig(int duration = 10000, List<Guid> serviceUuids = null) {
             Duration = duration;
-            NextPageType = nextPageType;
             ServiceUuids = serviceUuids == null ? new List<Guid>(new Guid[] { Constants.METAWEAR_GATT_SERVICE }) : serviceUuids;
         }
     }
@@ -63,7 +61,8 @@ namespace MbientLab.BtleDeviceScanner
     /// <summary>
     /// Page that scans for and shows nearby Bluetooth LE devices.
     /// </summary>
-    public sealed partial class ScannerPage : Page {
+    public sealed partial class ScannerPage : Page
+	{
         private BluetoothLEAdvertisementWatcher btleWatcher;
         private HashSet<ulong> seenDevices = new HashSet<ulong>();
         private ScanConfig config;
@@ -83,19 +82,22 @@ namespace MbientLab.BtleDeviceScanner
 		{
             InitializeComponent();
 
-			_metaWearBoards = metaWearBoards.ConvertAll<ulong>(str => MetaWearRPC.Global.ToMac)
+			_metaWearBoards = metaWearBoards.ConvertAll<ulong>(str => MetaWearRPC.Global.MacFromString(str));
 
-            btleWatcher = new BluetoothLEAdvertisementWatcher {
-                ScanningMode = BluetoothLEScanningMode.Active
-            };
-            btleWatcher.Received += async (w, btAdv) => {
+            btleWatcher = new BluetoothLEAdvertisementWatcher { ScanningMode = BluetoothLEScanningMode.Active };
+            btleWatcher.Received += async (w, btAdv) => 
+			{
                 if (!seenDevices.Contains(btAdv.BluetoothAddress) && 
-                        config.ServiceUuids.Aggregate(true, (acc, e) => acc & btAdv.Advertisement.ServiceUuids.Contains(e))) {
+                        config.ServiceUuids.Aggregate(true, (acc, e) => acc & btAdv.Advertisement.ServiceUuids.Contains(e)))
+				{
                     seenDevices.Add(btAdv.BluetoothAddress);
                     var device = await BluetoothLEDevice.FromBluetoothAddressAsync(btAdv.BluetoothAddress);
-                    if (device != null) {
-                        await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => pairedDevices.Items.Add(device));
-						Console.WriteLine()
+                    if (device != null)
+					{
+						//var board = MbientLab.MetaWear.Win10.Application.GetMetaWearBoard(device);
+						//await board.InitializeAsync();
+
+						await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => pairedDevices.Items.Add(device));
                     }
                 }
             };
@@ -105,13 +107,13 @@ namespace MbientLab.BtleDeviceScanner
             base.OnNavigatedTo(e);
 
             config = e.Parameter as ScanConfig;
-            refreshDevices_Click(null, null);
+            RefreshDevices_Click(null, null);
         }
 
         /// <summary>
         /// Callback for the refresh button which populates the devices list
         /// </summary>
-        private void refreshDevices_Click(object sender, RoutedEventArgs args) {
+        private void RefreshDevices_Click(object sender, RoutedEventArgs args) {
             if (timer != null) {
                 timer.Dispose();
                 timer = null;

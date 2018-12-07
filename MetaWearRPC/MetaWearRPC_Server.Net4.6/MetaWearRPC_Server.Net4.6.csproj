@@ -6,14 +6,15 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B8DD5E0C-628B-4BC0-A8E7-DFC3CCB4B51A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MetaWearRPC_Server</RootNamespace>
-    <AssemblyName>MetaWearRPC_Server</AssemblyName>
+    <RootNamespace>MetaWearRPC_Server.Net4.6</RootNamespace>
+    <AssemblyName>MetaWearRPC_Server.Net4.6</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -64,9 +65,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MetaWearRPC\MetaWearRPC.csproj">
-      <Project>{02ca3d9a-1b89-4081-94d5-f1d9cb9f1cb8}</Project>
-      <Name>MetaWearRPC</Name>
+    <ProjectReference Include="..\MetaWearRPC.Net4.6\MetaWearRPC.Net4.6.csproj">
+      <Project>{65711750-2ba2-4a23-a258-c887146065cd}</Project>
+      <Name>MetaWearRPC.Net4.6</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
