@@ -21,7 +21,7 @@ namespace MetaWearRPC
 		{
 			try
 			{
-				using (BLEDevicesManager bleDeviceManager = new BLEDevicesManager(boardMacs))
+				using (MetaWearBoardsManager mwBoardsManager = new MetaWearBoardsManager(boardMacs))
 				{
 					while (true)
 					{

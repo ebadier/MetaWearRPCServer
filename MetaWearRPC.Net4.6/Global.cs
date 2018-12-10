@@ -33,7 +33,6 @@ namespace MetaWearRPC
 		public static T RunSynchronously<T>(this Task<T> task)
 		{
 			Task.Run(() => task.Wait());
-			//task.RunSynchronously();
 			return task.Result;
 		}
 	}

@@ -55,16 +55,6 @@ namespace MetaWearRPC
 		}
 
 		#region IMetaWearContract
-		public void InitBoard(ulong pMacAdress)
-		{
-			_client.Contract.InitBoard(pMacAdress);
-		}
-
-		public void CloseBoard(ulong pMacAdress)
-		{
-			_client.Contract.CloseBoard(pMacAdress);
-		}
-
 		public string GetBoardModel(ulong pMacAdress)
 		{
 			return _client.Contract.GetBoardModel(pMacAdress);

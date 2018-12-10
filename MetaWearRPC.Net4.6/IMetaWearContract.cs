@@ -8,27 +8,15 @@ namespace MetaWearRPC
 	public interface IMetaWearContract
 	{
 		/// <summary>
-		/// Initialize the MetaWearBoard with the given mac address.
-		/// </summary>
-		[TntMessage(1)]
-		void InitBoard(ulong pMacAdress);
-
-		/// <summary>
-		/// Close the MetaWearBoard with the given mac address.
-		/// </summary>
-		[TntMessage(2)]
-		void CloseBoard(ulong pMacAdress);
-
-		/// <summary>
 		/// Return a description of the MetaWearBoard with the given mac address.
 		/// </summary>
-		[TntMessage(3)]
+		[TntMessage(1)]
 		string GetBoardModel(ulong pMacAdress);
 
 		/// <summary>
 		/// Return the battery level of the MetaWearBoard with the given mac address.
 		/// </summary>
-		[TntMessage(4)]
+		[TntMessage(2)]
 		byte GetBatteryLevel(ulong pMacAdress);
 
 		/// <summary>
@@ -36,14 +24,14 @@ namespace MetaWearRPC
 		/// </summary>
 		/// <param name="pDurationMs">How long to run the motor, in milliseconds (ms)</param>
 		/// <param name="pIntensity">Strength of the motor [0.0f ; 100.0f]</param>
-		[TntMessage(5)]
+		[TntMessage(3)]
 		void StartMotor(ulong pMacAdress, ushort pDurationMs, float pIntensity);
 
 		/// <summary>
 		/// Start pulsing a buzzer on the MetaWearBoard with the given mac address.
 		/// </summary>
 		/// <param name="pDurationMs">How long to run the buzzer, in milliseconds (ms)</param>
-		[TntMessage(6)]
+		[TntMessage(4)]
 		void StartBuzzer(ulong pMacAdress, ushort pDurationMs);
 	}
 }

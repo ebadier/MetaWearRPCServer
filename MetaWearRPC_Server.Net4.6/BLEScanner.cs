@@ -75,9 +75,10 @@ namespace MetaWearRPC
 			// Filter just the allowed devices.
 			if( (_allowedBleDevices == null) || _allowedBleDevices.Contains(eventArgs.BluetoothAddress) )
 			{
-				Console.WriteLine(string.Format("[BLEScanner] BLE device scanned: BT_ADDR:{0} ; NAME:{1}", eventArgs.BluetoothAddress, eventArgs.Advertisement.LocalName));
+				Console.WriteLine(string.Format("[BLEScanner] BLE device found: BT_ADDR:{0} ; NAME:{1}", eventArgs.BluetoothAddress, eventArgs.Advertisement.LocalName));
 
 				BluetoothLEDevice device = await BluetoothLEDevice.FromBluetoothAddressAsync(eventArgs.BluetoothAddress);
+				//BluetoothLEDevice device = BluetoothLEDevice.FromBluetoothAddressAsync(eventArgs.BluetoothAddress).AsTask().RunSynchronously<BluetoothLEDevice>();
 				if ( (device != null) && (BLEDeviceFound != null) )
 				{
 					BLEDeviceFound(device);
