@@ -12,6 +12,8 @@ namespace MetaWearRPC
     {
 		/// <summary>
 		/// Called when a BLE device is found.
+		/// Whenever this method is called, the BLE Scanner is automatically stopped.
+		/// If desired, the user can call StartScanning() in its callback, to continue the scan.
 		/// </summary>
 		public Action<BluetoothLEDevice> BLEDeviceFound;
 
@@ -32,6 +34,7 @@ namespace MetaWearRPC
 		{
 			// Starting watching for advertisements
 			_bleWatcher.Start();
+			//Console.WriteLine("[BLEScanner] Scanning started.");
 		}
 
 		/// <summary>
@@ -41,6 +44,7 @@ namespace MetaWearRPC
 		{
 			// Stop watching for advertisements
 			_bleWatcher.Stop();
+			//Console.WriteLine("[BLEScanner] Scanning stopped.");
 		}
 
 		/// <summary>
@@ -72,13 +76,15 @@ namespace MetaWearRPC
 
         private async void _OnAdvertisementReceived(BluetoothLEAdvertisementWatcher watcher, BluetoothLEAdvertisementReceivedEventArgs eventArgs)
         {
+			// Treating BLE devices one after the other avoid Threading conflits with async Tasks.
+			StopScanning();
+
 			// Filter just the allowed devices.
-			if( (_allowedBleDevices == null) || _allowedBleDevices.Contains(eventArgs.BluetoothAddress) )
+			if ( (_allowedBleDevices == null) || _allowedBleDevices.Contains(eventArgs.BluetoothAddress) )
 			{
-				Console.WriteLine(string.Format("[BLEScanner] BLE device found: BT_ADDR:{0} ; NAME:{1}", eventArgs.BluetoothAddress, eventArgs.Advertisement.LocalName));
+				Console.WriteLine(string.Format("[BLEScanner] BLE device found {0} : {1}.", eventArgs.Advertisement.LocalName, Global.MacToString(eventArgs.BluetoothAddress)));
 
 				BluetoothLEDevice device = await BluetoothLEDevice.FromBluetoothAddressAsync(eventArgs.BluetoothAddress);
-				//BluetoothLEDevice device = BluetoothLEDevice.FromBluetoothAddressAsync(eventArgs.BluetoothAddress).AsTask().RunSynchronously<BluetoothLEDevice>();
 				if ( (device != null) && (BLEDeviceFound != null) )
 				{
 					BLEDeviceFound(device);

@@ -3,7 +3,6 @@ using MbientLab.MetaWear.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Windows.Devices.Bluetooth;
 
 namespace MetaWearRPC
@@ -44,17 +43,11 @@ namespace MetaWearRPC
 		/// C2:48:ED:96:3B:74
 		public MetaWearBoardsManager(string pConfigFilePath)
 		{
-			if(System.IO.File.Exists(pConfigFilePath))
-			{
-				string content = System.IO.File.ReadAllText(pConfigFilePath);
-				List<string> macs = content.Split('\n').ToList();
-				macs.RemoveAll(mac => string.IsNullOrEmpty(mac));
-				_Init(macs);
-			}
-			else
-			{
-				throw new System.IO.FileNotFoundException("File not found : " + pConfigFilePath);
-			}
+			pConfigFilePath = System.IO.Path.GetFullPath(pConfigFilePath);
+			string content = System.IO.File.ReadAllText(pConfigFilePath);
+			List<string> macs = content.Split('\n').ToList();
+			macs.RemoveAll(mac => string.IsNullOrEmpty(mac));
+			_Init(macs);
 		}
 
 		/// <summary>
@@ -102,23 +95,18 @@ namespace MetaWearRPC
 			{
 				IMetaWearBoard mwBoard = MbientLab.MetaWear.Win10.Application.GetMetaWearBoard(pBLEDevice);
 				await mwBoard.InitializeAsync();
-				//Task.Run(() => mwBoard.InitializeAsync().Wait());
 				if (mwBoard.IsConnected)
 				{
-					Console.WriteLine(string.Format("[MetaWearBoardsManager] MetaWear board {0} initialized: Status = {1}.",
-						pBLEDevice.BluetoothAddress, pBLEDevice.ConnectionStatus));
+					Console.WriteLine(string.Format("[MetaWearBoardsManager] MetaWear board {0} {1}.",
+						Global.MacToString(pBLEDevice.BluetoothAddress), pBLEDevice.ConnectionStatus));
 
 					_connectedMWBoards.Add(pBLEDevice.BluetoothAddress, new Tuple<IMetaWearBoard, BluetoothLEDevice>(mwBoard, pBLEDevice));
 					pBLEDevice.ConnectionStatusChanged += _OnConnectionStatusChanged;
 				}
 			}
 
-			// Check for stopping Scan.
-			if(_desiredMWBoards.SetEquals(_connectedMWBoards.Keys))
-			{
-				Console.WriteLine("[MetaWearBoardsManager] All MetaWear boards found. Stopping scan...");
-				_bleScanner.StopScanning();
-			}
+			// Check for restarting Scan.
+			_CheckForScanning();
 		}
 
 		private void _OnConnectionStatusChanged(BluetoothLEDevice sender, object args)
@@ -127,22 +115,34 @@ namespace MetaWearRPC
 			{
 				if (_connectedMWBoards.TryGetValue(sender.BluetoothAddress, out Tuple<IMetaWearBoard, BluetoothLEDevice> board))
 				{
-					Console.WriteLine(string.Format("[MetaWearBoardsManager] MetaWear board {0} disconnected.", sender.BluetoothAddress));
+					Console.WriteLine(string.Format("[MetaWearBoardsManager] MetaWear board {0} {1}.",
+						Global.MacToString(sender.BluetoothAddress), sender.ConnectionStatus));
 
 					_connectedMWBoards.Remove(sender.BluetoothAddress);
 					_CloseBoard(board.Item1, board.Item2, false);
 				}
 
 				// Check for restarting Scan.
-				if (!_desiredMWBoards.SetEquals(_connectedMWBoards.Keys))
-				{
-					Console.WriteLine("[MetaWearBoardsManager] Some MetaWear boards missed. Restarting scan...");
-					_bleScanner.StartScanning();
-				}
+				_CheckForScanning();
 			}
 		}
 
-		private void _CloseBoard(IMetaWearBoard pBoard, BluetoothLEDevice pBLEDevice, bool pTearDown)
+		private void _CheckForScanning()
+		{
+			if (!_desiredMWBoards.SetEquals(_connectedMWBoards.Keys))
+			{
+				Console.WriteLine("[MetaWearBoardsManager] Some MetaWear boards missed. Restarting BLE scan...");
+				_bleScanner.StartScanning();
+			}
+			else
+			{
+				Console.ForegroundColor = ConsoleColor.Green;
+				Console.WriteLine("[MetaWearBoardsManager] All MetaWear boards connected.");
+				Console.ForegroundColor = ConsoleColor.Gray;
+			}
+		}
+
+		private async void _CloseBoard(IMetaWearBoard pBoard, BluetoothLEDevice pBLEDevice, bool pTearDown)
 		{
 			if (!pBoard.InMetaBootMode)
 			{
@@ -150,7 +150,7 @@ namespace MetaWearRPC
 				{
 					pBoard.TearDown();
 				}
-				pBoard.GetModule<IDebug>().DisconnectAsync().Wait();
+				await pBoard.GetModule<IDebug>().DisconnectAsync();
 			}
 
 			if(pTearDown)
