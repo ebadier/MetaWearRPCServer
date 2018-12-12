@@ -1,6 +1,6 @@
 # MetaWear RPC Server C#
 Regarding the difficulties to integrate the official MetaWear-SDK-CSharp (https://github.com/mbientlab/MetaWear-SDK-CSharp) into Unity3D,
-this solution provides the ability to send commands to MetaWear boards to non-supported platforms (e.g Unity3D) via RPC.
+this Windows solution provides the ability to send commands to MetaWear boards to non-supported C# platforms (e.g Unity3D) via RPC.
 
 # Projects
 - A MetaWear's RPC Server (project MetaWearRPC_Server.Net4.6): this application connects to some MetaWear boards (specified in the file mwBoards.cfg).
