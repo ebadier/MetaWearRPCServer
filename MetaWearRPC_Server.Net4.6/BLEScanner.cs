@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.Advertisement;
 
 namespace MetaWearRPC
@@ -12,10 +11,8 @@ namespace MetaWearRPC
     {
 		/// <summary>
 		/// Called when a BLE device is found.
-		/// Whenever this method is called, the BLE Scanner is automatically stopped.
-		/// If desired, the user can call StartScanning() in its callback, to continue the scan.
 		/// </summary>
-		public Action<BluetoothLEDevice> BLEDeviceFound;
+		public Action<BluetoothLEAdvertisementReceivedEventArgs> BLEDeviceFound;
 
 		/// <summary>
 		/// Act as a filter to only advertise for allowed BLE devices.
@@ -32,7 +29,6 @@ namespace MetaWearRPC
 		/// </summary>
 		public void StartScanning()
 		{
-			// Starting watching for advertisements
 			_bleWatcher.Start();
 			//Console.WriteLine("[BLEScanner] Scanning started.");
 		}
@@ -42,7 +38,6 @@ namespace MetaWearRPC
 		/// </summary>
 		public void StopScanning()
 		{
-			// Stop watching for advertisements
 			_bleWatcher.Stop();
 			//Console.WriteLine("[BLEScanner] Scanning stopped.");
 		}
@@ -50,7 +45,7 @@ namespace MetaWearRPC
 		/// <summary>
 		/// Constructor.
 		/// </summary>
-		/// <param name="pAllowedBLEDevices">Act as a filter to only advertise for allowed BLE devices.</param>
+		/// <param name="pAllowedBLEDevices">Act as a filter to only advertise for allowed BLE devices (null = "no filter")</param>
 		public BLEScanner(HashSet<ulong> pAllowedBLEDevices = null)
         {
 			_allowedBleDevices = pAllowedBLEDevices;
@@ -74,20 +69,16 @@ namespace MetaWearRPC
 			_bleWatcher.SignalStrengthFilter.SamplingInterval = TimeSpan.FromMilliseconds(2000);
         }
 
-        private async void _OnAdvertisementReceived(BluetoothLEAdvertisementWatcher watcher, BluetoothLEAdvertisementReceivedEventArgs eventArgs)
-        {
-			// Treating BLE devices one after the other avoid Threading conflits with async Tasks.
-			StopScanning();
-
+		private void _OnAdvertisementReceived(BluetoothLEAdvertisementWatcher watcher, BluetoothLEAdvertisementReceivedEventArgs eventArgs)
+		{
 			// Filter just the allowed devices.
 			if ( (_allowedBleDevices == null) || _allowedBleDevices.Contains(eventArgs.BluetoothAddress) )
 			{
 				Console.WriteLine(string.Format("[BLEScanner] BLE device found {0} : {1}.", eventArgs.Advertisement.LocalName, Global.MacToString(eventArgs.BluetoothAddress)));
 
-				BluetoothLEDevice device = await BluetoothLEDevice.FromBluetoothAddressAsync(eventArgs.BluetoothAddress);
-				if ( (device != null) && (BLEDeviceFound != null) )
+				if (BLEDeviceFound != null)
 				{
-					BLEDeviceFound(device);
+					BLEDeviceFound(eventArgs);
 				}
 			}
 		}
