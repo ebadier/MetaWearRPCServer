@@ -12,6 +12,8 @@ All the features of the MetaWear boards can be easily added by declaring new met
 ### How to use the RPC Server:
 * Fill the file mwBoards.cfg with your MetaWear boards MAC adresses.
 * Add the command line argument "..\\..\\..\\mwBoards.cfg" in the Debug section of the project properties.
+### WinRT References
+* Windows : C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd
 ### Dependencies
 * TheNetTunnel (https://github.com/tmteam/TheNetTunnel)
 
