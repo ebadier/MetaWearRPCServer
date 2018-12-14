@@ -57,6 +57,7 @@
     <Reference Include="MbientLab.MetaWear.DotNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f347d771e6582141, processorArchitecture=MSIL">
       <HintPath>..\packages\MetaWear.CSharp.Win10.1.0.9\lib\net461\MbientLab.MetaWear.DotNet.dll</HintPath>
     </Reference>
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="protobuf-net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <HintPath>..\packages\protobuf-net.2.4.0\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
@@ -71,7 +72,7 @@
     </Reference>
     <Reference Include="Windows, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Windows Kits\10\UnionMetadata\Windows.winmd</HintPath>
+      <HintPath>C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
