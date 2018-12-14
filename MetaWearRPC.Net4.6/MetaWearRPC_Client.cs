@@ -10,7 +10,7 @@ namespace MetaWearRPC
 	/// https://mbientlab.com/community/discussion/2601/unity-works-perfectly-with-metawear-sensor-on-first-run-hangs-on-2nd-run
 	/// Usage: 
 	/// 1) Connect()
-	/// 2) You can safely call IMetaWearContract's Methods between Connect() and Disconnect().
+	/// 2) Safely call IMetaWearContract's Methods between Connect() and Disconnect().
 	/// 3) Disconnect()
 	/// </summary>
 	public sealed class MetaWearRPC_Client : IMetaWearContract
@@ -68,6 +68,11 @@ namespace MetaWearRPC
 		public void StartMotor(ulong pMacAdress, ushort pDurationMs, float pIntensity)
 		{
 			_client.Contract.StartMotor(pMacAdress, pDurationMs, pIntensity);
+		}
+
+		public void StartMotorPattern(ulong pMacAdress, ushort pDurationMs, float pIntensity, ushort pSleepMs, int pPatternIterations)
+		{
+			_client.Contract.StartMotorPattern(pMacAdress, pDurationMs, pIntensity, pSleepMs, pPatternIterations);
 		}
 
 		public void StartBuzzer(ulong pMacAdress, ushort pDurationMs)

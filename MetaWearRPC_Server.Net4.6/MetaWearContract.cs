@@ -1,5 +1,8 @@
 ﻿using MbientLab.MetaWear;
 using MbientLab.MetaWear.Peripheral;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MetaWearRPC
 {
@@ -9,15 +12,12 @@ namespace MetaWearRPC
 	public sealed class MetaWearContract : IMetaWearContract
 	{
 		private MetaWearBoardsManager _mwBoardsManager;
+		private CancellationTokenSource _motorPatternCancellationToken;
 
-		public MetaWearContract()
-		{
-			_mwBoardsManager = null;
-		}
-
-		public void Init(MetaWearBoardsManager pMetaWearBoardsManager)
+		public MetaWearContract(MetaWearBoardsManager pMetaWearBoardsManager)
 		{
 			_mwBoardsManager = pMetaWearBoardsManager;
+			_motorPatternCancellationToken = null;
 		}
 
 		public string GetBoardModel(ulong pMacAdress)
@@ -51,6 +51,38 @@ namespace MetaWearRPC
 					haptic.StartMotor(pDurationMs, pIntensity);
 				}
 			}
+		}
+
+		public void StartMotorPattern(ulong pMacAdress, ushort pDurationMs, float pIntensity, ushort pSleepMs, int pPatternIterations)
+		{
+			// Cancel the Previous Task if Any.
+			if(_motorPatternCancellationToken != null)
+			{
+				_motorPatternCancellationToken.Cancel();
+			}
+
+			// Run the new Task.
+			_motorPatternCancellationToken = new CancellationTokenSource();
+			Task.Run(() =>
+			{
+				IMetaWearBoard board = _mwBoardsManager.GetBoard(pMacAdress);
+				if (board != null)
+				{
+					IHaptic haptic = board.GetModule<IHaptic>();
+					if (haptic != null)
+					{
+						// Set 120ms as the minimal duration between Bluetooth' stream of successives commands.
+						// Below this value, pattern can be broken by pushing too frequently on the BLE connection.
+						// Better solution should be to implement the vibration pattern directly on the MetaWearBoard.
+						int sleep = Math.Max((int)pSleepMs, 120) + pDurationMs;
+						while (pPatternIterations-- > 0)
+						{
+							haptic.StartMotor(pDurationMs, pIntensity);
+							Thread.Sleep(sleep);
+						}
+					}
+				}
+			}, _motorPatternCancellationToken.Token);
 		}
 
 		public void StartBuzzer(ulong pMacAdress, ushort pDurationMs)

@@ -23,14 +23,14 @@ namespace MetaWearRPC
 			{
 				using (MetaWearBoardsManager mwBoardsManager = new MetaWearBoardsManager(args[0]))
 				{
-					MetaWearContract rpcContract = new MetaWearContract();
-					rpcContract.Init(mwBoardsManager);
+					MetaWearContract rpcContract = new MetaWearContract(mwBoardsManager);
 
 					using (var rpcServer = TntBuilder
 					.UseContract<IMetaWearContract>(rpcContract)
 					.CreateTcpServer(IPAddress.Loopback, Global.ServerPort))
 					{
 						rpcServer.AfterConnect += RpcServer_AfterConnect;
+						rpcServer.Disconnected += RpcServer_Disconnected;
 						rpcServer.IsListening = true;
 						Console.WriteLine("[MetaWearRPC_Server] Server listening to clients...");
 						Console.WriteLine("[MetaWearRPC_Server] Press Esc to exit...");
@@ -69,22 +69,29 @@ namespace MetaWearRPC
 			}
 		}
 
+		private static void RpcServer_Disconnected(object arg1, TNT.Api.ClientDisconnectEventArgs<IMetaWearContract, TNT.Tcp.TcpChannel> arg2)
+		{
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine("[MetaWearRPC_Server] Client Disconnected : " + arg2.Connection.Channel.LocalEndpointName);
+			Console.ForegroundColor = ConsoleColor.Gray;
+		}
+
 		private static void RpcServer_AfterConnect(object arg1, TNT.Api.IConnection<IMetaWearContract, TNT.Tcp.TcpChannel> arg2)
 		{
 			Console.ForegroundColor = ConsoleColor.Yellow;
-			Console.WriteLine("[MetaWearRPC_Server] Client connected : " + arg2.Channel.LocalEndpointName);
+			Console.WriteLine("[MetaWearRPC_Server] Client Connected : " + arg2.Channel.LocalEndpointName);
 			Console.ForegroundColor = ConsoleColor.Gray;
 		}
 
 		private static void _MetaWearBoardsManagerTest(string[] args)
 		{
-			List<string> boardMacs = new List<string>()
-			{
-				"F6:E9:DD:B4:CF:4A",
-				"D2:80:93:BC:8C:FD",
-				"DF:16:4D:D1:5D:58",
-				"C2:48:ED:96:3B:74"
-			};
+			//List<string> boardMacs = new List<string>()
+			//{
+			//	"F6:E9:DD:B4:CF:4A",
+			//	"D2:80:93:BC:8C:FD",
+			//	"DF:16:4D:D1:5D:58",
+			//	"C2:48:ED:96:3B:74"
+			//};
 
 			try
 			{
@@ -102,7 +109,7 @@ namespace MetaWearRPC
 						Thread.Sleep(100);
 					}
 				}
-				Console.WriteLine("[MetaWearRPC_Server] Server closing...");
+				Console.WriteLine("[MetaWearRPC_Server] MetaWearBoardsManager closing...");
 				Thread.Sleep(2000);
 			}
 			catch (Exception e)

@@ -12,7 +12,7 @@ namespace MetaWearRPC
 		public const int ServerPort = 28550;
 
 		/// <summary>
-		/// Convert a Mac Address of Type "F6:E9:DD:B4:CF:4A" to one of type F6E9DDB4CF4A.
+		/// Convert a Mac Address from its string representation to its hexadecimal representation.
 		/// </summary>
 		public static ulong MacFromString(string pMac)
 		{
@@ -20,7 +20,7 @@ namespace MetaWearRPC
 		}
 
 		/// <summary>
-		/// Convert a Mac Address of Type F6E9DDB4CF4A to one of type "F6:E9:DD:B4:CF:4A".
+		/// Convert a Mac Address from its hexadecimal representation to its string representation.
 		/// </summary>
 		public static string MacToString(ulong pMac)
 		{
