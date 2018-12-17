@@ -37,17 +37,17 @@ namespace MetaWearRPC
 		/// Constructor.
 		/// </summary>
 		/// <param name="pConfigFilePath">A file containing a list of desired MetaWear boards' mac addresses.</param>
-		/// Example of file content:
+		/// Example of file content (# is used to comment).
 		/// F6:E9:DD:B4:CF:4A
 		/// D2:80:93:BC:8C:FD
-		/// DF:16:4D:D1:5D:58
-		/// C2:48:ED:96:3B:74
+		/// #DF:16:4D:D1:5D:58
+		/// #C2:48:ED:96:3B:74
 		public MetaWearBoardsManager(string pConfigFilePath)
 		{
 			pConfigFilePath = System.IO.Path.GetFullPath(pConfigFilePath);
 			string content = System.IO.File.ReadAllText(pConfigFilePath);
 			List<string> macs = content.Split('\n').ToList();
-			macs.RemoveAll(mac => string.IsNullOrEmpty(mac));
+			macs.RemoveAll(mac => string.IsNullOrEmpty(mac) || mac.Contains("#"));
 			_Init(macs);
 		}
 

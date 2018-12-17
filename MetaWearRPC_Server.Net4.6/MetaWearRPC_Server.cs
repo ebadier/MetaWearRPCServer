@@ -35,11 +35,11 @@ namespace MetaWearRPC
 						Console.WriteLine("[MetaWearRPC_Server] Server listening to clients...");
 						Console.WriteLine("[MetaWearRPC_Server] Press Esc to exit...");
 
-						// Test.
+						//Test.
 						//using (var rpcCient = TntBuilder
 						//	.UseContract<IMetaWearContract>()
 						//	.CreateTcpClientConnection(IPAddress.Loopback, Global.ServerPort))
-						//{
+						{
 
 							while (true)
 							{
@@ -49,14 +49,24 @@ namespace MetaWearRPC
 								{
 									break;
 								}
-								//else if (key == ConsoleKey.NumPad0) // Test.
+								//else if (key == ConsoleKey.NumPad1) // Test.
 								//{
-								//	rpcCient.Contract.StartMotor(testMac, 1000, 100.0f);
+								//	rpcCient.Contract.StartMotorPattern(testMac, 5000, 100.0f, 100, 1);
 								//	Console.WriteLine("[MetaWearRPC_Server] Client sent vibration.");
+								//}
+								//else if(key == ConsoleKey.NumPad2) // Stop Vibration Test.
+								//{
+								//	//rpcCient.Contract.StartMotor(testMac, 50, 100.0f);
+								//	//int i = 0;
+								//	//while(i++ < 500)
+								//	{
+								//		//rpcContract.StartMotorPattern(testMac, 50, 20.0f, 100, 1);
+								//		rpcContract.StartMotorPattern(testMac, 5000, 1.0f, 100, 1);
+								//	}
 								//}
 								Thread.Sleep(100);
 							}
-						//}
+						}
 					}
 				}
 				Console.WriteLine("[MetaWearRPC_Server] Server closing...");
