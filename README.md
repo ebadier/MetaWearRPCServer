@@ -1,6 +1,6 @@
 # MetaWear RPC Server C#
-Regarding the difficulties to integrate the official MetaWear-SDK-CSharp (https://github.com/mbientlab/MetaWear-SDK-CSharp) into Unity3D,
-this Windows solution provides the ability to send commands to MetaWear boards to non-supported C# platforms (e.g Unity3D) via RPC.
+Regarding the difficulties to integrate the official [MetaWear-SDK-CSharp](https://github.com/mbientlab/MetaWear-SDK-CSharp) into Unity3D,
+this Windows solution provides the ability to send commands to [MetaWear boards](https://mbientlab.com/metamotionr/) to non-supported C# platforms (e.g Unity3D) via RPC.
 
 # Projects
 ## MetaWearRPC_Server.Net4.6 
@@ -15,13 +15,13 @@ All the features of the MetaWear boards can be easily added by declaring new met
 ### WinRT References
 * Windows : C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd
 ### Dependencies (automatically installed using NuGet packages)
-* TheNetTunnel (https://github.com/tmteam/TheNetTunnel)
-* MetaWear-SDK-CSharp (https://github.com/mbientlab/MetaWear-SDK-CSharp)
-* MetaWear-SDK-CSharp-Plugin-Win10 (https://github.com/mbientlab/MetaWear-SDK-CSharp-Plugin-Win10)
+* [TheNetTunnel](https://github.com/tmteam/TheNetTunnel)
+* [MetaWear-SDK-CSharp](https://github.com/mbientlab/MetaWear-SDK-CSharp)
+* [MetaWear-SDK-CSharp-Plugin-Win10](https://github.com/mbientlab/MetaWear-SDK-CSharp-Plugin-Win10)
 
 ## MetaWearRPC.Net4.6 
 Use this library to create RPC Clients to send commands to the MetaWear's RPC Server.
-The dlls can be used in Unity3D (version >= 2017). See the Unity3D RPC Client project : https://github.com/ebadier/MetaWearUnityRPC
+The dlls can be used in Unity3D : an example is [MetaWearUnityRPC](https://github.com/ebadier/MetaWearUnityRPC)
 ### Configure Unity3D to use the dlls:
 * Go to Edit > ProjectSettings > Player:
   * Scripting Runtime Version : Experimental(.Net 4.6 Equivalent)
@@ -29,4 +29,4 @@ The dlls can be used in Unity3D (version >= 2017). See the Unity3D RPC Client pr
   * Api Compatibility Level : .Net 4.6
 * Copy MetaWearRPC.Net4.6.dll, protobuf-net.dll, TNT.dll in Assets folder.
 ### Dependencies (automatically installed using NuGet packages)
-* TheNetTunnel (https://github.com/tmteam/TheNetTunnel)
+* [TheNetTunnel](https://github.com/tmteam/TheNetTunnel)
